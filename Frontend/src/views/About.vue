@@ -16,7 +16,7 @@
           <img src="../../src/assets/about.jpg" />
         </div>
 
-        <div class="flex items-center ">
+        <div class="flex items-center">
           <div class="mx-10">
             <h6 class="tracking-widest">DESIGN</h6>
             <h1>Made for Each Woman</h1>
@@ -25,19 +25,23 @@
               seeks to celebrate feminine beauty and strength through fun and
               creative fashion.
             </p>
-            <button class=" bg-black text-white px-6 py-2.5 mt-4">SHOP NOW</button>
+            
+            <button class="bg-black text-white px-6 py-2.5 mt-4">
+              <router-link to="/products"> SHOP NOW</router-link>
+            </button>
           </div>
         </div>
       </div>
 
       <div class="mt-24 grid grid-cols-2">
-        <div class="flex items-center ">
+        <div class="flex items-center">
           <div class="">
             <h6 class="tracking-widest">SUSTAINABILITY</h6>
             <h1>Vegan Leather + Recycled Plastic</h1>
             <p>
-              Sustainability is in JW PEI's DNA. We use high quality canvas, 
-              polyurethane, and certified fabric made from recycled plastic bottles.
+              Sustainability is in JW PEI's DNA. We use high quality canvas,
+              polyurethane, and certified fabric made from recycled plastic
+              bottles.
             </p>
           </div>
         </div>
@@ -46,14 +50,14 @@
           <img src="../../src/assets/recycle.jpg" />
         </div>
       </div>
-
     </div>
   </div>
+  <!-- <footer/> -->
 </template>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500;600&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Antonio&family=Hammersmith+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Antonio&family=Hammersmith+One&display=swap");
 
 h1 {
   font-family: "Rajdhani", sans-serif;
@@ -69,7 +73,7 @@ img {
   width: 90%;
 }
 button {
-  font-family: 'Hammersmith One', sans-serif;
+  font-family: "Hammersmith One", sans-serif;
   font-size: 15px;
 }
 </style>
