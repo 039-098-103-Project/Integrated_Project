@@ -1,16 +1,15 @@
 <template>
-  <navbar></navbar> 
+  <navbar/> 
   <div class="container flex justify-center">
     <img src="../../src/assets/bg-img.jpg" style="width: 100%" />
 
     <div class="textcenter">
       <div class="text-sm mb-4">C O D</div>
-      <marquee direction="UP">Hello</marquee>
       <div class="text-6xl mb-5">Treding For Spring</div>
       <div>Product By JW PEI</div>
     </div>
   </div>
- 
+ <footer/>
 </template>
 
 
