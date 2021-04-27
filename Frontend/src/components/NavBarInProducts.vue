@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-end">
-      <div class="space-x-20 pb-4 text-black font-semibold">
+      <div class="space-x-20 text-black font-semibold">
         <router-link to="/products" class="hover:text-red-600">All Product</router-link>
         <router-link to="/addProduct" class="hover:text-red-600">Add Product</router-link>
       </div>
