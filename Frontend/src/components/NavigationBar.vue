@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center">
+  <div class="flex justify-center sticky top-0 z-10">
     <div>
       <div class="py-6 flex justify-center">
         <p>JW PEI</p>
@@ -13,6 +13,7 @@
     </div>
   </div>
 </template>
+
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");

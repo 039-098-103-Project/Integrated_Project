@@ -1,10 +1,10 @@
 <template>
   <navbar />
+
   <div class="mx-20 pt-10">
-      <div class="pr-8">
-        <navProducts />  
-      </div>
-    
+    <div class="pr-8">
+      <navProducts />
+    </div>
 
     <div class="my-12">
       <div class="grid grid-cols-4">
@@ -41,7 +41,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
