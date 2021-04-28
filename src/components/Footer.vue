@@ -28,7 +28,7 @@
 div {
   font-size: 20px;
   font-family: "Rajdhani", sans-serif;
-  color: black;
+  color: #001233;
   /* background-color: #414535; */
 }
 img {
@@ -36,6 +36,6 @@ img {
 }
 hr {
   width: 1400px;
-  border: 1px solid black;
+  border: 1px solid #001d4a;
 }
 </style>

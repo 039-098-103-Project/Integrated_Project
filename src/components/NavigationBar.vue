@@ -1,14 +1,14 @@
 <template>
-  <div class="flex justify-center sticky top-0 z-10">
+  <div class="flex justify-center sticky top-0 z-10 bg-gradient-to-r from-gray-900 via-gray-800 to-indigo-900">
     <div>
       <div class="py-6 flex justify-center">
         <p>JW PEI</p>
       </div>
       <div class="space-x-44 pb-4 text-white ">
-        <router-link to="/" class="hover:text-yellow-400">Home</router-link>
-        <router-link to="/products" class="hover:text-yellow-400">Products</router-link>
-        <router-link to="/about" class="hover:text-yellow-400">About</router-link>
-        <router-link to="/team" class="hover:text-yellow-400">Team</router-link>
+        <router-link to="/" class="hover:text-indigo-300">Home</router-link>
+        <router-link to="/products" class="hover:text-indigo-400">Products</router-link>
+        <router-link to="/about" class="hover:text-indigo-400">About</router-link>
+        <router-link to="/team" class="hover:text-indigo-500">Team</router-link>
       </div>
     </div>
   </div>
@@ -23,7 +23,7 @@ div {
   font-size: 20px;
   font-family: "Mitr", sans-serif;
   text-decoration: none;
-  background-color: #414535;
+  /* background-color: #1c1c1c; */
 }
 p {
   font-family: "Bebas Neue", sans-serif;
