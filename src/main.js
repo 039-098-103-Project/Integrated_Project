@@ -8,6 +8,6 @@ import NavBarInProducts from '@/components/NavBarInProducts.vue'
 
 const app = createApp(App).use(router)
 app.component('navbar' ,NavigationBar)
-app.component('footer', Footer)
+app.component('Footer', Footer)
 app.component('navProducts', NavBarInProducts)
 app.mount('#app')

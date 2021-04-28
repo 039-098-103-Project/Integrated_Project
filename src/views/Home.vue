@@ -1,5 +1,6 @@
 <template>
   <navbar/> 
+  <footer/>
   <div class="container flex justify-center">
     <img src="../../src/assets/bg-img.jpg" style="width: 100%" />
 
@@ -9,7 +10,7 @@
       <div>Product By JW PEI</div>
     </div>
   </div>
- <footer/>
+ <Footer/>
 </template>
 
 

@@ -52,7 +52,7 @@
       </div>
     </div>
   </div>
-  <!-- <footer/> -->
+  <Footer/>
 </template>
 
 <style scoped>
