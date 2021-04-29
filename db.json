@@ -1,3 +1,19 @@
-data{
-    
-}
+{
+    "products": [
+      {
+        "name": "NYX PRO DROP FOUNDATION",
+        "price": "5,000",
+        "date": "2021-01-30" ,
+        "description": "Adjustable Liquid Foundation",
+        "image": "../../src/assets/",
+        "id": 1
+      },
+      {
+        "name": "DIOR LIP GLOW",
+        "price": "1,390",
+        "date": "2021-02-02",
+        "description": "Hydrating color reviver lip balm",
+        "id": 2
+      }
+    ]
+  }

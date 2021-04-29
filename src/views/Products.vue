@@ -8,37 +8,7 @@
 
     <div class="my-12">
       <div class="grid grid-cols-4">
-        <div>
-          <img src="../../src/assets/Bag/11.jpg" />
-          <h3>Cloud Top Bag - Orange</h3>
-        </div>
-        <div>
-          <img src="../../src/assets/Bag/14.jpg" />
-        </div>
-        <div>
-          <img src="../../src/assets/Bag/8.jpg" />
-        </div>
-        <div>
-          <img src="../../src/assets/Bag/1.jpg" />
-        </div>
-      </div>
-    </div>
-
-    <div class="my-12">
-      <div class="grid grid-cols-4">
-        <div>
-          <img src="../../src/assets/Bag/5.jpg" />
-          <h3>Cloud Top Bag - Orange</h3>
-        </div>
-        <div>
-          <img src="../../src/assets/Bag/15.jpg" />
-        </div>
-        <div>
-          <img src="../../src/assets/Bag/9.jpg" />
-        </div>
-        <div>
-          <img src="../../src/assets/Bag/13.jpg" />
-        </div>
+        
       </div>
     </div>
   </div>
