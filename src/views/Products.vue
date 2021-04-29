@@ -9,7 +9,9 @@
     <div class="my-12 grid grid-cols-4">
       <div class="" v-for="show in products" :key="show.id">
         <img :src="require(`../assets/Bag/${show.image}`)"/>
+        <div class="color rounded-full"> {{ show.colorBag }}</div>
         <h3 class="text-black"> {{ show.name }} - {{ show.color }} </h3>
+        <h4 class="mb-10 font-extralight">{{ show.price }} $</h4>
       </div>
     </div>
   </div>
@@ -29,6 +31,8 @@ export default {
       price: null,
       name: "",
       color: "",
+      colorBag: [
+      ],
     }
   },
 
@@ -63,6 +67,11 @@ h3 {
   font-family: "Mitr", sans-serif;
   text-align: center;
   padding-top: 18px;
+}
+h4{
+  font-family: "Mitr", sans-serif;
+  text-align: center;
+  padding-top: 14px;
 }
 
 </style>
