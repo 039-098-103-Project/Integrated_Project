@@ -6,7 +6,7 @@
 
     <div class="textcenter">
       <div class="text-sm mb-4">C O D</div>
-      <div class="text-6xl mb-5">Treding For Spring</div>
+      <div class="tred text-6xl mb-5">Treding For Spring</div>
       <div>Product By JW PEI</div>
     </div>
   </div>
@@ -30,4 +30,24 @@
   font-family: "Mitr", sans-serif;
 }
 
+
 </style>
+
+// <script>
+//   var textWrapper = document.querySelector('.tred');
+//   anime.timeline({loop: true})
+//   .add({
+//     targets: '.tred',
+//     opacity: [0,1],
+//     easing: "easeInOutQuad",
+//     duration: 2250,
+//     delay: (el, i) => 150 * (i+1)
+//   }).add({
+//     targets: '.tred',
+//     opacity: 0,
+//     duration: 1000,
+//     easing: "easeOutExpo",
+//     delay: 1000
+//   });
+
+// </script>
