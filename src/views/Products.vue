@@ -8,14 +8,17 @@
 
     <div class="my-12 grid grid-cols-4">
       <div class="" v-for="show in products" :key="show.id">
-        <img :src="require(`../assets/Bag/${show.image}`)" @click="showProduct(show.id)"/>
+        <img
+          :src="require(`../assets/Bag/${show.image}`)"
+          @click="showProduct(show.id)"
+        />
 
         <div class="colorSlot justify-center pt-4">
           <div
             class="colors justify-center pt-4"
             v-for="colorProduct in show.colorBag"
             :key="colorProduct.idColor"
-            :style="{background: colorProduct.idColor}"
+            :style="{ background: colorProduct.idColor }"
           ></div>
         </div>
 
@@ -24,46 +27,41 @@
       </div>
     </div>
 
-    <div v-show="show" class="bg-black bg-opacity-50 info my-10 h-3/5">
-          <button
-            class="text-white text-5xl absolute right-6 top-4"
-            @click="clickShow"
-          >
-            X
-          </button>
-          <div
-            class="flex flex-col justify-center items-center"
-            v-for="product in products"
-            :key="product.id"
-          >
-            <div class="pt-10">
-              <img
-                :src="require(`../assets/Bag/${product.image}`)"
-                class="h-96 w-64"
-              />
-            </div>
-            <div class="pt-5">
-              <p class="text-white text-xl p-2">
-                <span class="font-bold">NAME: </span> {{ product.name }}
-              </p>
-              <p class="text-white text-xl p-2">
-                <span class="font-bold">POSITION: </span> {{ product.colorBag }}
-              </p>
-              <p class="text-white text-xl p-2">
-                <span class="font-bold">BIRTH DATE: </span> {{ product.price }}
-              </p>
-              <p class="text-white text-xl p-2">
-                <span class="font-bold">BLOOD TYPE: </span>
-                {{ product.date }}
-              </p>
-              <p class="text-white text-xl p-2">
-                <span class="font-bold">NATIONALITY: </span>
-                {{ product.description }}
-              </p>
-            </div>
-          </div>
+    
+  </div><div v-show="show" class="bg-black bg-opacity-70 info my-10 h-3/5">
+      <span class="material-icons" @click="clickShow"> close </span>
+      <div
+        class="flex flex-col justify-center items-center"
+        v-for="product in products"
+        :key="product.id"
+      >
+        <div class="pt-10">
+          <img
+            :src="require(`../assets/Bag/${product.image}`)"
+            class="h-96 w-64"
+          />
         </div>
-  </div>
+        <div class="pt-5">
+          <p class="text-white text-xl p-2">
+            <span class="font-bold">NAME: </span> {{ product.name }}
+          </p>
+          <p class="text-white text-xl p-2">
+            <span class="font-bold">POSITION: </span> {{ product.colorBag }}
+          </p>
+          <p class="text-white text-xl p-2">
+            <span class="font-bold">BIRTH DATE: </span> {{ product.price }}
+          </p>
+          <p class="text-white text-xl p-2">
+            <span class="font-bold">BLOOD TYPE: </span>
+            {{ product.date }}
+          </p>
+          <p class="text-white text-xl p-2">
+            <span class="font-bold">NATIONALITY: </span>
+            {{ product.description }}
+          </p>
+        </div>
+      </div>
+    </div>
   <Footer />
 </template>
 
@@ -89,7 +87,6 @@ export default {
       change: false,
       editId: null,
       adminMode: false,
-      
     };
   },
 
@@ -104,12 +101,12 @@ export default {
       }
     },
 
-    clickShow(){
+    clickShow() {
       this.show = !this.show;
     },
 
-    async showProduct(productId){
-      try{
+    async showProduct(productId) {
+      try {
         this.products = [];
         const res = await fetch(`${this.url}/${productId}`);
         const data = await res.json();
@@ -125,16 +122,15 @@ export default {
         } else if (!this.adminMode) {
           this.clickShow();
         }
-        return ;
-      }catch(error){
+        return;
+      } catch (error) {
         console.log(`Could not show member info! ${error}`);
       }
     },
 
-    toggleadminMode(){
+    toggleadminMode() {
       this.adminMode = !this.adminMode;
-    }
-
+    },
   },
 
   async created() {
@@ -168,9 +164,8 @@ h4 {
   border-radius: 50px;
   transition: 0.6s linear;
 }
-.colorSlot{
+.colorSlot {
   display: flex;
   width: 100%;
 }
-
 </style>
