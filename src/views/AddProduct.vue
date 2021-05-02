@@ -4,11 +4,12 @@
     <navProducts />
 
     <div class="grid grid-cols-2 my-12">
-      <div id="preview">
+
+      <div id="preview" >
         <div class="">
-          <div class="bg-yellow-500 border-md"></div>
+          <div class="border-md"></div>
           <img v-if="url" :src="url" />
-          <input type="file" @change="selectFile" />
+          <input type="file" @change="selectFile" class="text-center ml-20"/>
         </div>
       </div>
 
