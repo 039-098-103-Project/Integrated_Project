@@ -48,7 +48,7 @@
                 <div>
                   <p class="">Price</p>
                 <input
-                  class="w-80 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md"
+                  class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md"
                   type="text"
                   placeholder="Price"
                   v-model="productPrice"
@@ -61,7 +61,7 @@
                 <div class="">
                   Bag Type
                   <form name="dropdown" action="/action_page.php" >
-                    <select name="cars" id="cars" v-model="productType">
+                    <select v-model="productType">
                       <option value="volvo">Mini Flap Bag</option>
                       <option value="saab">The Fae Bag</option>
                       <option value="opel">Gabbi Bag</option>
@@ -98,17 +98,6 @@
                 >
                   <input type="checkbox" :value="color.id" v-model="productColor" />
                 </label>
-
-                <!-- <div class="showColor inline">
-                  <button
-                    class="checkColor mx-1 rounded-lg focus:ring-2 focus:ring-purple-600 focus:outline-none focus:ring-opacity-50"
-                    v-for="color in colors"
-                    :key="color.id"
-                    :style="{ background: color.id }"
-                    type="checkbox"
-                    @click="checkColor"
-                  ></button>
-                </div> -->
               </div>
 
               <div class="mb-6">
@@ -119,9 +108,11 @@
                 <p class="">Description</p>
                 <input
                   v-model="productDescreiption"
-                  class="w-full h-40 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md break-words"
+                  class="w-full h-40 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded 
+                  focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md break-words text-justify
+                  whitespace-normal"
                   type="text"
-                  placeholder="Product Name"
+                  placeholder="Description..."
                 />
               </div>
             </div>
