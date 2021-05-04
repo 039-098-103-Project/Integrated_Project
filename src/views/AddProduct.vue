@@ -5,7 +5,7 @@
 
     <div class="grid grid-cols-2 my-12">
       <label
-        class="border-2 border-blue-800 h-64 w-64 flex flex-col items-center justify-center cursor-pointer rounded-lg shadow-lg"
+        class="border-2 border-blue-800 h-80 w-80 flex flex-col items-center justify-center cursor-pointer rounded-lg shadow-lg"
         id="preview"
       >
         <svg
@@ -31,25 +31,37 @@
         <div>
           <form @submit.prevent="submitForm">
             <div>
-              <div class="mb-6 flex justify-between">
-                <p>Product Name</p>
+              <div class="mb-6 grid grid-cols-2">
+                <div>
+                  <div>
+                  <p>Product Name</p>
+                </div>
+                <div>
+                  <input
+                    v-model="productName"
+                    class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md"
+                    type="text"
+                    placeholder="Product Name"
+                  />
+                </div>
+                </div>
+                <div>
+                  <p class="">Price</p>
                 <input
-                  v-model="enteredName"
-                  class="ml-2 w-80 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md"
+                  class="w-80 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md"
                   type="text"
-                  placeholder="Product Name"
+                  placeholder="Price"
+                  v-model="productPrice"
                 />
+                </div>
+                
               </div>
 
-              <div class="mb-6 flex justify-between">
-                <div class="inline">Bag Type</div>
-                <div>
-                  <form
-                    name="dropdown"
-                    action="/action_page.php"
-                    class="inline"
-                  >
-                    <select name="cars" id="cars">
+              <div class="mb-6 grid grid-cols-2">
+                <div class="">
+                  Bag Type
+                  <form name="dropdown" action="/action_page.php" >
+                    <select name="cars" id="cars" v-model="productType">
                       <option value="volvo">Mini Flap Bag</option>
                       <option value="saab">The Fae Bag</option>
                       <option value="opel">Gabbi Bag</option>
@@ -63,15 +75,28 @@
                     </select>
                   </form>
                 </div>
+                <div class="justify-end">
+                  <p class="">Will Be In Stock On</p>
+                  <input
+                    class="border border-black rounded"
+                    type="date"
+                    v-model="productDate"
+                  />
+                </div>
+              </div>
+
+              <div>
+                Color
               </div>
 
               <div class="mb-6 flex justify-between">
-                <div class="inline">Color</div>
-
-                <label class="checkbox"  v-for="color in colors"
-                    :key="color.id"
-                    :style="{ background: color.id }">
-                  <input type="checkbox"/>
+                <label
+                  class="checkbox rounded"
+                  v-for="color in colors"
+                  :key="color.id"
+                  :style="{ background: color.id }"
+                >
+                  <input type="checkbox" v-model="productColor"/>
                 </label>
 
                 <!-- <div class="showColor inline">
@@ -86,29 +111,15 @@
                 </div> -->
               </div>
 
-              <div class="mb-6 flex justify-between">
-                <p class="inline">Price</p>
-                <input
-                  class="inline w-80 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md"
-                  type="text"
-                  placeholder="Price"
-                />
+              <div class="mb-6">
+                
               </div>
 
-              <div class="mb-6 flex justify-between">
-                <p class="inline">Will Be In Stock On</p>
+              <div class="mb-6">
+                <p class="">Description</p>
                 <input
-                  class="border border-black rounded inline"
-                  type="date"
-                  v-model="enteredDate"
-                />
-              </div>
-
-              <div class="mb-6 flex justify-between">
-                <p class="inline">Description</p>
-                <input
-                  v-model="enteredName"
-                  class="inline w-80 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md break-words"
+                  v-model="productDescreiption"
+                  class="w-full h-40 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md break-words"
                   type="text"
                   placeholder="Product Name"
                 />
@@ -134,7 +145,7 @@
 export default {
   data() {
     return {
-      url: null,
+      // urlData: null,
       colors: [
         { id: "#242423" },
         { id: "#7F8164" },
@@ -149,7 +160,7 @@ export default {
       ],
       enteredDate: "",
       check: false,
-      urlData: "http://localhost:5000/products",
+      url: "http://localhost:5000/products",
       inputName: false,
       inputPrice: false,
       inputColor: false,
@@ -162,16 +173,17 @@ export default {
       productDescreiption: "",
       productType: null,
       productColor: [],
+      productDate: "",
     };
   },
 
   methods: {
-    selectFile(e) {
-      const file = e.target.files[0];
-      this.url = URL.createObjectURL(file);
-    },
+    // selectFile(e) {
+    //   const file = e.target.files[0];
+    //   this.urlData = URL.createObjectURL(file);
+    // },
 
-    checkColor(){
+    checkColor() {
       this.check = !this.check;
     },
 
@@ -180,7 +192,7 @@ export default {
       this.inputPrice = this.productPrice === null ? true : false;
       this.inputColor = this.productColor === [] ? true : false;
       this.inputType = this.productType === null ? true : false;
-      this.inputDate = this.enteredDate === "" ? true : false;
+      this.inputDate = this.productDate === "" ? true : false;
       this.inputDescription = this.productDescreiption === "" ? true : false;
       this.addProduct();
       this.productName = "";
@@ -189,7 +201,7 @@ export default {
 
     async addProduct() {
       try {
-        const res = await fetch(this.urlData, {
+        const res = await fetch(this.url, {
           method: "POST",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify({
@@ -222,38 +234,22 @@ export default {
   width: 100%;
 }
 
-.checkColor {
-  width: 30px;
-  height: 30px;
-}
-
-
-.showColor {
-  display: flex;
-}
-
 .checkbox {
-    display: inline-flex;
-    cursor: pointer;
-    position: relative;
+  display: flex;
+  cursor: pointer;
 }
 
 .checkbox > input {
-    height: 25px;
-    width: 25px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -o-appearance: none;
-    appearance: none;
-    border: 1px solid #34495E;
-    border-radius: 4px;
-    outline: none;
-    transition-duration: 0.3s;
-    cursor: pointer;
-  }
-
-.checkbox > input:checked {
-    border: 2px solid red;
+  height: 30px;
+  width: 30px;
+  appearance: none;
+  border-radius: 4px;
+  outline: none;
+  transition-duration: 0.3s;
+  cursor: pointer;
 }
 
+.checkbox > input:checked {
+  border: 2px solid red;
+}
 </style>

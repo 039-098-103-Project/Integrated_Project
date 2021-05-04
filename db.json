@@ -226,40 +226,17 @@
       "id": 12
     },
     {
-      "name": "",
-      "color": [],
-      "price": null,
-      "date": "2021-05-13",
-      "description": "",
-      "colorBag": [],
+      "name": "fgh",
+      "color": [
+        "on"
+      ],
+      "price": "45",
+      "date": "",
+      "description": "sdfasf",
+      "colorBag": [
+        "on"
+      ],
       "id": 13
-    },
-    {
-      "name": "",
-      "color": [],
-      "price": null,
-      "date": "2021-05-13",
-      "description": "",
-      "colorBag": [],
-      "id": 14
-    },
-    {
-      "name": "",
-      "color": [],
-      "price": null,
-      "date": "2021-05-13",
-      "description": "",
-      "colorBag": [],
-      "id": 15
-    },
-    {
-      "name": "",
-      "color": [],
-      "price": null,
-      "date": "2021-05-13",
-      "description": "",
-      "colorBag": [],
-      "id": 16
     }
   ]
 }
