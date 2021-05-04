@@ -27,7 +27,7 @@
         />
       </label>
 
-      <div class="">
+      <div>
         <div>
           <form @submit.prevent="submitForm">
             <div>
@@ -68,14 +68,22 @@
               <div class="mb-6 flex justify-between">
                 <div class="inline">Color</div>
 
-                <div class="showColor inline">
+                <label class="checkbox"  v-for="color in colors"
+                    :key="color.id"
+                    :style="{ background: color.id }">
+                  <input type="checkbox"/>
+                </label>
+
+                <!-- <div class="showColor inline">
                   <button
                     class="checkColor mx-1 rounded-lg focus:ring-2 focus:ring-purple-600 focus:outline-none focus:ring-opacity-50"
                     v-for="color in colors"
                     :key="color.id"
                     :style="{ background: color.id }"
+                    type="checkbox"
+                    @click="checkColor"
                   ></button>
-                </div>
+                </div> -->
               </div>
 
               <div class="mb-6 flex justify-between">
@@ -140,6 +148,7 @@ export default {
         { id: "#ABC3C7" },
       ],
       enteredDate: "",
+      check: false,
       urlData: "http://localhost:5000/products",
       inputName: false,
       inputPrice: false,
@@ -162,6 +171,10 @@ export default {
       this.url = URL.createObjectURL(file);
     },
 
+    checkColor(){
+      this.check = !this.check;
+    },
+
     submitFrom() {
       this.inputName = this.productName === "" ? true : false;
       this.inputPrice = this.productPrice === null ? true : false;
@@ -169,7 +182,7 @@ export default {
       this.inputType = this.productType === null ? true : false;
       this.inputDate = this.enteredDate === "" ? true : false;
       this.inputDescription = this.productDescreiption === "" ? true : false;
-      this.addP roduct();
+      this.addProduct();
       this.productName = "";
       this.productPrice = null;
     },
@@ -214,7 +227,33 @@ export default {
   height: 30px;
 }
 
+
 .showColor {
   display: flex;
 }
+
+.checkbox {
+    display: inline-flex;
+    cursor: pointer;
+    position: relative;
+}
+
+.checkbox > input {
+    height: 25px;
+    width: 25px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    border: 1px solid #34495E;
+    border-radius: 4px;
+    outline: none;
+    transition-duration: 0.3s;
+    cursor: pointer;
+  }
+
+.checkbox > input:checked {
+    border: 2px solid red;
+}
+
 </style>

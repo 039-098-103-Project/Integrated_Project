@@ -1,167 +1,265 @@
 {
-    "products": [
-      {
-        "name": "Gabbi Bag",
-        "color": "Beer",
-        "price": "15.5",
-        "date": "2021-01-30" ,
-        "description": "Adjustable Liquid Foundation",
-        "image": "C1.jpg",
-        "colorBag": [
-          {"idColor": "#BF8B3F"},
-          {"idColor": "#ABC3C7"},
-          {"idColor": "#ffbfcb"}
-        ],
-        "id": 1
-      },
-      {
-        "name": "Cloud Top Bag",
-        "color": "Orange",
-        "price": "21.25",
-        "date": "2021-02-02",
-        "description": "Hydrating color reviver lip balm",
-        "image": "K1.jpg",
-        "colorBag": [
-          {"idColor": "#FEA46D"},
-          {"idColor": "#D18E64"},
-          {"idColor": "#FFF3E4"}
-        ],
-        "id": 2
-      },
-      {
-        "name": "Maze Bag",
-        "color": "Sage Green",
-        "price": "12.75",
-        "date": "2021-02-02",
-        "description": "Hydrating color reviver lip balm",
-        "image": "H1.jpg",
-        "colorBag": [
-          {"idColor": "#7F8164"},
-          {"idColor": "#242423"},
-          {"idColor": "#ABC3C7"}
-        ],
-        "id": 3
-      },
-      {
-        "name": "Evalope Bag",
-        "color": "Black",
-        "price": "15.5",
-        "date": "2021-02-02",
-        "description": "Hydrating color reviver lip balm",
-        "image": "F1-1.jpg",
-        "colorBag": [
-          {"idColor": "#242423"},
-          {"idColor": "#E7DCD5"}
-        ],
-        "id": 4
-      },
-      {
-        "name": "Evalope Bag",
-        "color": "Black",
-        "price": "15.5",
-        "date": "2021-02-02",
-        "description": "Hydrating color reviver lip balm",
-        "image": "G2.jpg",
-        "colorBag": [
-          {"idColor": "#FFF3E4"},
-          {"idColor": "#F9E37C"}
-        ],
-        "id": 5
-      },
-      {
-        "name": "Evalope Bag",
-        "color": "Black",
-        "price": "15.5",
-        "date": "2021-02-02",
-        "description": "Hydrating color reviver lip balm",
-        "image": "A1-1.jpg",
-        "colorBag": [
-          {"idColor": "#242423"},
-          {"idColor": "#D18E64"}
-        ],
-        "id": 6
-      },
-      {
-        "name": "Evalope Bag",
-        "color": "Black",
-        "price": "15.5",
-        "date": "2021-02-02",
-        "description": "Hydrating color reviver lip balm",
-        "image": "I1.jpg",
-        "colorBag": [
-          {"idColor": "#ffbfcb"},
-          {"idColor": "#F9E37C"}
-        ],
-        "id": 7
-      },
-      {
-        "name": "Evalope Bag",
-        "color": "Black",
-        "price": "15.5",
-        "date": "2021-02-02",
-        "description": "Hydrating color reviver lip balm",
-        "image": "K2.jpg",
-        "colorBag": [
-          {"idColor": "#FEA46D"},
-          {"idColor": "#D18E64"},
-          {"idColor": "#FFF3E4"}
-        ],
-        "id": 8
-      },
-      {
-        "name": "Evalope Bag",
-        "color": "Black",
-        "price": "15.5",
-        "date": "2021-02-02",
-        "description": "Hydrating color reviver lip balm",
-        "image": "J1.jpg",
-        "colorBag": [
-          {"idColor": "#F9E37C"},
-          {"idColor": "#FFF3E4"},
-          {"idColor": "#ABC3C7"}
-        ],
-        "id": 9
-      },
-      {
-        "name": "Evalope Bag",
-        "color": "Black",
-        "price": "15.5",
-        "date": "2021-02-02",
-        "description": "Hydrating color reviver lip balm",
-        "image": "C3.jpg",
-        "colorBag": [
-          {"idColor": "#D18E64"},
-          {"idColor": "#BF8B3F"},
-          {"idColor": "#242423"}
-        ],
-        "id": 10
-      },
-      {
-        "name": "Evalope Bag",
-        "color": "Black",
-        "price": "15.5",
-        "date": "2021-02-02",
-        "description": "Hydrating color reviver lip balm",
-        "image": "E3.jpg",
-        "colorBag": [
-          {"idColor": "#F9E37C"},
-          {"idColor": "#D18E64"}
-        ],
-        "id": 11
-      },
-      {
-        "name": "Evalope Bag",
-        "color": "Black",
-        "price": "15.5",
-        "date": "2021-02-02",
-        "description": "Hydrating color reviver lip balm",
-        "image": "B1.jpg",
-        "colorBag": [
-          {"idColor": "#ABC3C7"},
-          {"idColor": "#FFF3E4"},
-          {"idColor": "#7F8164"}
-        ],
-        "id": 12
-      }
-    ]
-  }
+  "products": [
+    {
+      "name": "Gabbi Bag",
+      "color": "Beer",
+      "price": "15.5",
+      "date": "2021-01-30",
+      "description": "Adjustable Liquid Foundation",
+      "image": "C1.jpg",
+      "colorBag": [
+        {
+          "idColor": "#BF8B3F"
+        },
+        {
+          "idColor": "#ABC3C7"
+        },
+        {
+          "idColor": "#ffbfcb"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "name": "Cloud Top Bag",
+      "color": "Orange",
+      "price": "21.25",
+      "date": "2021-02-02",
+      "description": "Hydrating color reviver lip balm",
+      "image": "K1.jpg",
+      "colorBag": [
+        {
+          "idColor": "#FEA46D"
+        },
+        {
+          "idColor": "#D18E64"
+        },
+        {
+          "idColor": "#FFF3E4"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "name": "Maze Bag",
+      "color": "Sage Green",
+      "price": "12.75",
+      "date": "2021-02-02",
+      "description": "Hydrating color reviver lip balm",
+      "image": "H1.jpg",
+      "colorBag": [
+        {
+          "idColor": "#7F8164"
+        },
+        {
+          "idColor": "#242423"
+        },
+        {
+          "idColor": "#ABC3C7"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "name": "Evalope Bag",
+      "color": "Black",
+      "price": "15.5",
+      "date": "2021-02-02",
+      "description": "Hydrating color reviver lip balm",
+      "image": "F1-1.jpg",
+      "colorBag": [
+        {
+          "idColor": "#242423"
+        },
+        {
+          "idColor": "#E7DCD5"
+        }
+      ],
+      "id": 4
+    },
+    {
+      "name": "Evalope Bag",
+      "color": "Black",
+      "price": "15.5",
+      "date": "2021-02-02",
+      "description": "Hydrating color reviver lip balm",
+      "image": "G2.jpg",
+      "colorBag": [
+        {
+          "idColor": "#FFF3E4"
+        },
+        {
+          "idColor": "#F9E37C"
+        }
+      ],
+      "id": 5
+    },
+    {
+      "name": "Evalope Bag",
+      "color": "Black",
+      "price": "15.5",
+      "date": "2021-02-02",
+      "description": "Hydrating color reviver lip balm",
+      "image": "A1-1.jpg",
+      "colorBag": [
+        {
+          "idColor": "#242423"
+        },
+        {
+          "idColor": "#D18E64"
+        }
+      ],
+      "id": 6
+    },
+    {
+      "name": "Evalope Bag",
+      "color": "Black",
+      "price": "15.5",
+      "date": "2021-02-02",
+      "description": "Hydrating color reviver lip balm",
+      "image": "I1.jpg",
+      "colorBag": [
+        {
+          "idColor": "#ffbfcb"
+        },
+        {
+          "idColor": "#F9E37C"
+        }
+      ],
+      "id": 7
+    },
+    {
+      "name": "Evalope Bag",
+      "color": "Black",
+      "price": "15.5",
+      "date": "2021-02-02",
+      "description": "Hydrating color reviver lip balm",
+      "image": "K2.jpg",
+      "colorBag": [
+        {
+          "idColor": "#FEA46D"
+        },
+        {
+          "idColor": "#D18E64"
+        },
+        {
+          "idColor": "#FFF3E4"
+        }
+      ],
+      "id": 8
+    },
+    {
+      "name": "Evalope Bag",
+      "color": "Black",
+      "price": "15.5",
+      "date": "2021-02-02",
+      "description": "Hydrating color reviver lip balm",
+      "image": "J1.jpg",
+      "colorBag": [
+        {
+          "idColor": "#F9E37C"
+        },
+        {
+          "idColor": "#FFF3E4"
+        },
+        {
+          "idColor": "#ABC3C7"
+        }
+      ],
+      "id": 9
+    },
+    {
+      "name": "Evalope Bag",
+      "color": "Black",
+      "price": "15.5",
+      "date": "2021-02-02",
+      "description": "Hydrating color reviver lip balm",
+      "image": "C3.jpg",
+      "colorBag": [
+        {
+          "idColor": "#D18E64"
+        },
+        {
+          "idColor": "#BF8B3F"
+        },
+        {
+          "idColor": "#242423"
+        }
+      ],
+      "id": 10
+    },
+    {
+      "name": "Evalope Bag",
+      "color": "Black",
+      "price": "15.5",
+      "date": "2021-02-02",
+      "description": "Hydrating color reviver lip balm",
+      "image": "E3.jpg",
+      "colorBag": [
+        {
+          "idColor": "#F9E37C"
+        },
+        {
+          "idColor": "#D18E64"
+        }
+      ],
+      "id": 11
+    },
+    {
+      "name": "Evalope Bag",
+      "color": "Black",
+      "price": "15.5",
+      "date": "2021-02-02",
+      "description": "Hydrating color reviver lip balm",
+      "image": "B1.jpg",
+      "colorBag": [
+        {
+          "idColor": "#ABC3C7"
+        },
+        {
+          "idColor": "#FFF3E4"
+        },
+        {
+          "idColor": "#7F8164"
+        }
+      ],
+      "id": 12
+    },
+    {
+      "name": "",
+      "color": [],
+      "price": null,
+      "date": "2021-05-13",
+      "description": "",
+      "colorBag": [],
+      "id": 13
+    },
+    {
+      "name": "",
+      "color": [],
+      "price": null,
+      "date": "2021-05-13",
+      "description": "",
+      "colorBag": [],
+      "id": 14
+    },
+    {
+      "name": "",
+      "color": [],
+      "price": null,
+      "date": "2021-05-13",
+      "description": "",
+      "colorBag": [],
+      "id": 15
+    },
+    {
+      "name": "",
+      "color": [],
+      "price": null,
+      "date": "2021-05-13",
+      "description": "",
+      "colorBag": [],
+      "id": 16
+    }
+  ]
+}
