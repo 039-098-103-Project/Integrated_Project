@@ -96,7 +96,7 @@
                   :key="color.id"
                   :style="{ background: color.id }"
                 >
-                  <input type="checkbox" v-model="productColor"/>
+                  <input type="checkbox" :value="color.id" v-model="productColor" />
                 </label>
 
                 <!-- <div class="showColor inline">
@@ -206,7 +206,7 @@ export default {
           headers: { "Content-type": "application/json" },
           body: JSON.stringify({
             name: this.productName,
-            color: this.productColor,
+            // color: this.color.id,
             price: this.productPrice,
             date: this.productDate,
             description: this.productDescreiption,
