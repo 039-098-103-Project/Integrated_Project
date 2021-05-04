@@ -224,19 +224,6 @@
         }
       ],
       "id": 12
-    },
-    {
-      "name": "fgh",
-      "color": [
-        "on"
-      ],
-      "price": "45",
-      "date": "",
-      "description": "sdfasf",
-      "colorBag": [
-        "on"
-      ],
-      "id": 13
     }
   ]
 }

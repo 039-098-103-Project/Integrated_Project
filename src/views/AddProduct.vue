@@ -208,7 +208,7 @@ export default {
             name: this.productName,
             color: this.productColor,
             price: this.productPrice,
-            date: this.enteredDate,
+            date: this.productDate,
             description: this.productDescreiption,
             colorBag: this.productColor,
           }),
