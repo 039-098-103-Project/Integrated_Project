@@ -62,16 +62,16 @@
                   Bag Type
                   <form name="dropdown" action="/action_page.php" >
                     <select v-model="productType">
-                      <option value="volvo">Mini Flap Bag</option>
-                      <option value="saab">The Fae Bag</option>
-                      <option value="opel">Gabbi Bag</option>
-                      <option value="audi">Rantan Bag</option>
-                      <option value="audi">Envelope Bag</option>
-                      <option value="audi">Eva Shoulder Bag</option>
-                      <option value="audi">Maze Bag</option>
-                      <option value="audi">Mila Shoulder Bag</option>
-                      <option value="audi">Quinn Phone Bag</option>
-                      <option value="audi">Cloud Top Bag</option>
+                      <option >Mini Flap Bag</option>
+                      <option >The Fae Bag</option>
+                      <option >Gabbi Bag</option>
+                      <option >Rantan Bag</option>
+                      <option >Envelope Bag</option>
+                      <option >Eva Shoulder Bag</option>
+                      <option >Maze Bag</option>
+                      <option >Mila Shoulder Bag</option>
+                      <option >Quinn Phone Bag</option>
+                      <option >Cloud Top Bag</option>
                     </select>
                   </form>
                 </div>

@@ -22,50 +22,65 @@
           ></div>
         </div>
 
-        <h3 class="text-black">{{ show.name }} - {{ show.color }}</h3>
+        <h3 class="text-black">{{ show.name }}</h3>
         <h4 class="mb-10 font-extralight">{{ show.price }} $</h4>
       </div>
-    </div>
 
-    
-  </div><div v-show="show" class="bg-black bg-opacity-70 info my-10 h-3/5">
-      <span class="material-icons" @click="clickShow"> close </span>
+      <!-- popup -->
       <div
-        class="flex flex-col justify-center items-center"
-        v-for="product in products"
-        :key="product.id"
+        v-if="show"
+        class="bg-black bg-opacity-90 info my-10 absolute w-full"
       >
-        <div class="pt-10">
+        <div>
+          <span class="material-icons" @click="clickShow"> close </span>
+        </div>
+        <div v-for="product in popupProduct" :key="product.id">
           <img
             :src="require(`../assets/Bag/${product.image}`)"
-            class="h-96 w-64"
+            class="showImage"
           />
-        </div>
-        <div class="pt-5">
-          <p class="text-white text-xl p-2">
-            <span class="font-bold">NAME: </span> {{ product.name }}
+          <p>
+            {{ product.name }}
           </p>
-          <p class="text-white text-xl p-2">
-            <span class="font-bold">POSITION: </span> {{ product.colorBag }}
+          <div class="colorSlot">
+            <div
+              class="colors"
+              v-for="showColor in product.colorBag"
+              :key="showColor.idColor"
+              :style="{ background: showColor.idColor }"
+            ></div>
+          </div>
+          <p>
+            {{ product.price }}
           </p>
-          <p class="text-white text-xl p-2">
-            <span class="font-bold">BIRTH DATE: </span> {{ product.price }}
-          </p>
-          <p class="text-white text-xl p-2">
-            <span class="font-bold">BLOOD TYPE: </span>
+          <p>
             {{ product.date }}
           </p>
-          <p class="text-white text-xl p-2">
-            <span class="font-bold">NATIONALITY: </span>
+          <p>
             {{ product.description }}
           </p>
+          <button class="bg-green-500" @click="ediProduct(product)">
+            EDIT
+          </button>
+          <button class="bg-red-500" @click="deleteProduct(product.id)">
+            DELETE
+          </button>
         </div>
       </div>
+
+      <!-- edit -->
+      <div v-if="edit" class="bg-black bg-opacity-90 info my-10 absolute w-full">
+        <form @submit.prevent="editSubmit(submitEdit)">
+
+        </form>
+      </div>
     </div>
+  </div>
   <Footer />
 </template>
 
 <script>
+
 export default {
   name: "Products",
   components: {},
@@ -73,20 +88,19 @@ export default {
   data() {
     return {
       products: [],
+      popupProduct: [],
       url: " http://localhost:5000/products",
       image: "",
       price: null,
       name: "",
-      color: "",
       colorBag: [],
       description: "",
       date: null,
+      type: "",
       show: false,
       edit: false,
-      isEdit: false,
-      change: false,
-      editId: null,
-      adminMode: false,
+      delete: false,
+      submitEdit: null,
     };
   },
 
@@ -107,29 +121,83 @@ export default {
 
     async showProduct(productId) {
       try {
-        this.products = [];
+        this.popupProduct = [];
         const res = await fetch(`${this.url}/${productId}`);
         const data = await res.json();
-        this.products.push(data);
-        if (this.adminMode && !this.isEdit) {
-          this.toggleEdit();
-          this.isEdit = true;
-          this.editId = data.id;
-          this.image = data.image;
-          this.name = data.name;
-          this.date = data.date;
-          this.description = data.description;
-        } else if (!this.adminMode) {
-          this.clickShow();
-        }
-        return;
+        this.popupProduct.push(data);
+        this.clickShow();
+        return this.popupProduct;
       } catch (error) {
         console.log(`Could not show member info! ${error}`);
       }
     },
 
-    toggleadminMode() {
-      this.adminMode = !this.adminMode;
+    editProduct(product) {
+      this.edit = true;
+      this.name = product.name;
+      this.price = product.price;
+      this.description = product.description;
+      this.type = product.type;
+      this.date = product.date;
+      this.color = product.color;
+
+      this.submitEdit = product;
+    },
+
+    async editSubmit(editing) {
+      const res = await fetch(`${this.url}/${editing.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          name: this.name,
+          price: this.price,
+          type: this.type,
+          description: this.description,
+          date: this.date,
+          colorBag: this.colorBag,
+        }),
+      });
+      const data = await res.json();
+      this.products = this.products.map((product) =>
+        product.id === data.id
+          ? {
+              ...product,
+              name: data.name,
+              price: data.price,
+              description: data.description,
+              type: data.type,
+              colorBag: data.colorBag,
+              date: data.date,
+            }
+          : product
+      );
+      this.name = "",
+      this.price = null,
+      this.type = "",
+      this.description = "",
+      this.colorBag = [],
+      this.date = null,
+      this.edit = false,
+      this.editSubmit = null
+    },
+
+    // clickDelete() {
+    //   this.delete = !this.delete;
+    // },
+
+    async deleteProduct(productId) {
+      if (confirm(`Are you sure to delete ?`)) {
+        const res = await fetch(`${this.url}/${productId}`, {
+          method: "DELETE",
+        });
+        res.status === 200
+          ? (this.products = this.products.filter(
+              (product) => product.productId !== productId
+            ))
+          : alert("Error to delete product");
+      }
     },
   },
 
@@ -167,5 +235,9 @@ h4 {
 .colorSlot {
   display: flex;
   width: 100%;
+}
+.showImage {
+  width: 300px;
+  height: 300px;
 }
 </style>
