@@ -1,29 +1,33 @@
 <template>
   <navbar />
 
-  <div class="mx-20 pt-10">
-    <div class="pr-8">
-      <navProducts />
-    </div>
+  <div >
+    <div class="mx-20">
+      <div class="pr-8 pt-10">
+        <navProducts />
+      </div>
 
-    <div class="my-12 grid grid-cols-4">
-      <div class="" v-for="show in products" :key="show.id">
-        <img
-          :src="require(`../assets/Bag/${show.image}`)"
-          @click="showProduct(show.id)"
-        />
+      <div class="grid grid-cols-4 mb-10">
+        <div class="" v-for="show in products" :key="show.id">
+          <img
+            :src="require(`../assets/Bag/${show.image}`)"
+            @click="showProduct(show.id)"
+          />
 
-        <div class="colorSlot justify-center pt-4">
-          <div
-            class="colors justify-center pt-4"
-            v-for="colorProduct in show.colorBag"
-            :key="colorProduct.idColor"
-            :style="{ background: colorProduct.idColor }"
-          ></div>
+          <div class="colorSlot justify-center pt-4">
+            <div
+              class="colors justify-center pt-4"
+              v-for="colorProduct in show.colorBag"
+              :key="colorProduct.color"
+              :style="{ background: colorProduct.color }"
+            ></div>
+          </div>
+
+          <h3 class="text-black">{{ show.name }}</h3>
+          <h4 class="mb-10 font-extralight">{{ show.price }} $</h4>
         </div>
 
-        <h3 class="text-black">{{ show.name }}</h3>
-        <h4 class="mb-10 font-extralight">{{ show.price }} $</h4>
+        
       </div>
 
       <!-- popup -->
@@ -47,7 +51,7 @@
               class="colors"
               v-for="showColor in product.colorBag"
               :key="showColor.idColor"
-              :style="{ background: showColor.idColor }"
+              :style="{ background: showColor.color }"
             ></div>
           </div>
           <p>
@@ -69,18 +73,19 @@
       </div>
 
       <!-- edit -->
-      <div v-if="edit" class="bg-black bg-opacity-90 info my-10 absolute w-full">
-        <form @submit.prevent="editSubmit(submitEdit)">
-
-        </form>
+      <div
+        v-if="edit"
+        class="bg-black bg-opacity-90 info my-10 absolute w-full"
+      >
+        <form @submit.prevent="editSubmit(submitEdit)"></form>
       </div>
     </div>
   </div>
+
   <Footer />
 </template>
 
 <script>
-
 export default {
   name: "Products",
   components: {},
@@ -173,14 +178,14 @@ export default {
             }
           : product
       );
-      this.name = "",
-      this.price = null,
-      this.type = "",
-      this.description = "",
-      this.colorBag = [],
-      this.date = null,
-      this.edit = false,
-      this.editSubmit = null
+      (this.name = ""),
+        (this.price = null),
+        (this.type = ""),
+        (this.description = ""),
+        (this.colorBag = []),
+        (this.date = null),
+        (this.edit = false),
+        (this.editSubmit = null);
     },
 
     // clickDelete() {

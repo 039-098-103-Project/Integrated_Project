@@ -9,33 +9,19 @@
       "type": "Mini Flap Bag",
       "colorBag": [
         {
-          "idColor": "#FEA46D"
+          "color": "#FEA46D",
+          "idColor": 1
         },
         {
-          "idColor": "#D18E64"
+          "color": "#D18E64",
+          "idColor": 2
         },
         {
-          "idColor": "#FFF3E4"
+          "color": "#FFF3E4",
+          "idColor": 3
         }
       ],
       "id": 2
-    },
-    {
-      "name": "Evalope Bag",
-      "price": "15.5",
-      "date": "2021-02-02",
-      "description": "Hydrating color reviver lip balm",
-      "image": "EB.jpg",
-      "type": "Mini Flap Bag",
-      "colorBag": [
-        {
-          "idColor": "#242423"
-        },
-        {
-          "idColor": "#E7DCD5"
-        }
-      ],
-      "id": 4
     },
     {
       "name": "Evalope Bag",
@@ -46,10 +32,12 @@
       "type": "Mini Flap Bag",
       "colorBag": [
         {
-          "idColor": "#FFF3E4"
+          "color": "#FFF3E4",
+          "idColor": 3
         },
         {
-          "idColor": "#F9E37C"
+          "color": "#F9E37C",
+          "idColor": 4
         }
       ],
       "id": 5
@@ -63,10 +51,12 @@
       "type": "Mini Flap Bag",
       "colorBag": [
         {
-          "idColor": "#242423"
+          "color": "#242423",
+          "idColor": 5
         },
         {
-          "idColor": "#D18E64"
+          "color": "#D18E64",
+          "idColor": 2
         }
       ],
       "id": 6
@@ -80,10 +70,12 @@
       "type": "Mini Flap Bag",
       "colorBag": [
         {
-          "idColor": "#ffbfcb"
+          "color": "#ffbfcb",
+          "idColor": 6
         },
         {
-          "idColor": "#F9E37C"
+          "color": "#F9E37C",
+          "idColor": 4
         }
       ],
       "id": 7
@@ -97,13 +89,16 @@
       "type": "Mini Flap Bag",
       "colorBag": [
         {
-          "idColor": "#FEA46D"
+          "color": "#FEA46D",
+          "idColor": 1
         },
         {
-          "idColor": "#D18E64"
+          "color": "#D18E64",
+          "idColor": 2
         },
         {
-          "idColor": "#FFF3E4"
+          "color": "#FFF3E4",
+          "idColor": 3
         }
       ],
       "id": 8
@@ -117,13 +112,16 @@
       "type": "Mini Flap Bag",
       "colorBag": [
         {
-          "idColor": "#F9E37C"
+          "color": "#F9E37C",
+          "idColor": 4
         },
         {
-          "idColor": "#FFF3E4"
+          "color": "#FFF3E4",
+          "idColor": 3
         },
         {
-          "idColor": "#ABC3C7"
+          "color": "#ABC3C7",
+          "idColor": 7
         }
       ],
       "id": 9
@@ -137,13 +135,16 @@
       "type": "Mini Flap Bag",
       "colorBag": [
         {
-          "idColor": "#D18E64"
+          "color": "#D18E64",
+          "idColor": 2
         },
         {
-          "idColor": "#BF8B3F"
+          "color": "#BF8B3F",
+          "idColor": 8
         },
         {
-          "idColor": "#242423"
+          "color": "#242423",
+          "idColor": 5
         }
       ],
       "id": 10
@@ -157,10 +158,12 @@
       "type": "Mini Flap Bag",
       "colorBag": [
         {
-          "idColor": "#F9E37C"
+          "color": "#F9E37C",
+          "idColor": 4
         },
         {
-          "idColor": "#D18E64"
+          "color": "#D18E64",
+          "idColor": 2
         }
       ],
       "id": 11
@@ -174,13 +177,16 @@
       "type": "Mini Flap Bag",
       "colorBag": [
         {
-          "idColor": "#ABC3C7"
+          "color": "#ABC3C7",
+          "idColor": 7
         },
         {
-          "idColor": "#FFF3E4"
+          "color": "#FFF3E4",
+          "idColor": 3
         },
         {
-          "idColor": "#7F8164"
+          "color": "#7F8164",
+          "idColor": 9
         }
       ],
       "id": 12

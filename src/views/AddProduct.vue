@@ -34,44 +34,50 @@
               <div class="mb-6 grid grid-cols-2">
                 <div>
                   <div>
-                  <p>Product Name</p>
+                    <p>Product Name</p>
+                  </div>
+                  <div>
+                    <input
+                      v-model="productName"
+                      class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md"
+                      type="text"
+                      placeholder="Product Name"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <input
-                    v-model="productName"
-                    class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md"
-                    type="text"
-                    placeholder="Product Name"
-                  />
-                </div>
-                </div>
+                <sup v-show="inputName">
+                  Please enter product name!
+                </sup>
+
                 <div>
                   <p class="">Price</p>
-                <input
-                  class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md"
-                  type="text"
-                  placeholder="Price"
-                  v-model="productPrice"
-                />
+                  <input
+                    class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md"
+                    type="text"
+                    placeholder="Price"
+                    v-model="productPrice"
+                  />
                 </div>
-                
               </div>
+              <sup v-show="inputPrice">
+                  Please enter product price!
+                </sup>
 
               <div class="mb-6 grid grid-cols-2">
                 <div class="">
                   Bag Type
-                  <form name="dropdown" action="/action_page.php" >
+                  <form name="dropdown" action="/action_page.php">
                     <select v-model="productType">
-                      <option >Mini Flap Bag</option>
-                      <option >The Fae Bag</option>
-                      <option >Gabbi Bag</option>
-                      <option >Rantan Bag</option>
-                      <option >Envelope Bag</option>
-                      <option >Eva Shoulder Bag</option>
-                      <option >Maze Bag</option>
-                      <option >Mila Shoulder Bag</option>
-                      <option >Quinn Phone Bag</option>
-                      <option >Cloud Top Bag</option>
+                      <option>Mini Flap Bag</option>
+                      <option>The Fae Bag</option>
+                      <option>Gabbi Bag</option>
+                      <option>Rantan Bag</option>
+                      <option>Envelope Bag</option>
+                      <option>Eva Shoulder Bag</option>
+                      <option>Maze Bag</option>
+                      <option>Mila Shoulder Bag</option>
+                      <option>Quinn Phone Bag</option>
+                      <option>Cloud Top Bag</option>
                     </select>
                   </form>
                 </div>
@@ -84,11 +90,11 @@
                   />
                 </div>
               </div>
+              <sup v-show="inputDate">
+                  Please enter stock date!
+              </sup>
 
-              <div>
-                Color
-              </div>
-
+              <div>Color</div>
               <div class="mb-6 flex justify-between">
                 <label
                   class="checkbox rounded"
@@ -96,25 +102,29 @@
                   :key="color.id"
                   :style="{ background: color.id }"
                 >
-                  <input type="checkbox" :value="color.id" v-model="productColor" />
+                  <input
+                    type="checkbox"
+                    :value="color.id"
+                    v-model="productColor"
+                  />
                 </label>
               </div>
-
-              <div class="mb-6">
-                
-              </div>
+              <sup v-show="inputColor">
+                  Please enter product color more than one!
+                </sup>
 
               <div class="mb-6">
                 <p class="">Description</p>
                 <input
                   v-model="productDescreiption"
-                  class="w-full h-40 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded 
-                  focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md break-words text-justify
-                  whitespace-normal"
+                  class="w-full h-40 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md break-words text-justify whitespace-normal"
                   type="text"
                   placeholder="Description..."
                 />
               </div>
+              <sup v-show="inputDescription">
+                  Please enter description!
+                </sup>
             </div>
           </form>
         </div>
@@ -162,7 +172,7 @@ export default {
       productName: "",
       productPrice: null,
       productDescreiption: "",
-      productType: null,
+      productType: "",
       productColor: [],
       productDate: "",
     };
@@ -182,12 +192,24 @@ export default {
       this.inputName = this.productName === "" ? true : false;
       this.inputPrice = this.productPrice === null ? true : false;
       this.inputColor = this.productColor === [] ? true : false;
-      this.inputType = this.productType === null ? true : false;
+      this.inputType = this.productType === "" ? true : false;
       this.inputDate = this.productDate === "" ? true : false;
       this.inputDescription = this.productDescreiption === "" ? true : false;
       this.addProduct();
       this.productName = "";
       this.productPrice = null;
+      if(
+        this.inputName ||
+        this.inputPrice ||
+        this.inputColor ||
+        this.inputType ||
+        this.inputDate ||
+        this.inputDescription
+      ){
+        return;
+      }
+      this.inputPrice = parseInt(this.inputPrice);
+
     },
 
     async addProduct() {
@@ -202,6 +224,7 @@ export default {
             date: this.productDate,
             description: this.productDescreiption,
             colorBag: this.productColor,
+            type: this.productType,
           }),
         });
 
@@ -210,7 +233,7 @@ export default {
         this.productName = "";
         this.productPrice = null;
         this.productDescreiption = "";
-        this.productType = null;
+        this.productType = "";
         this.productColor = [];
       } catch (error) {
         console.log(`Could not save! ${error}`);
@@ -242,5 +265,8 @@ export default {
 
 .checkbox > input:checked {
   border: 2px solid red;
+}
+sup{
+  color: red;
 }
 </style>
