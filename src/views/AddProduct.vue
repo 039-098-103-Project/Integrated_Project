@@ -218,13 +218,14 @@ export default {
           method: "POST",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify({
-            name: this.productName,
-            // color: this.color.id,
+            productName: this.productName,
             price: this.productPrice,
-            date: this.productDate,
-            description: this.productDescreiption,
-            colorBag: this.productColor,
-            type: this.productType,
+            inStockDate: this.productDate,
+            productDescrip: this.productDescreiption,
+            // imageName: ""
+            bagType: this.productType,
+            colors: this.productColor,
+            
           }),
         });
 

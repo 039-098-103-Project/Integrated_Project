@@ -1,39 +1,35 @@
 <template>
   <navbar />
 
-  <div >
-    <div class="mx-20">
-      <div class="pr-8 pt-10">
-        <navProducts />
-      </div>
+  <div class="mx-20 relative">
+    <div class="pr-8 pt-10">
+      <navProducts />
+    </div>
 
-      <div class="grid grid-cols-4 mb-10">
-        <div class="" v-for="show in products" :key="show.id">
-          <img
-            :src="require(`../assets/Bag/${show.image}`)"
-            @click="showProduct(show.id)"
-          />
+    <div class="grid grid-cols-4">
+      <div class="my-12" v-for="show in products" :key="show.id">
+        <img
+          :src="require(`../assets/Bag/${show.image}`)"
+          @click="showProduct(show.id)"
+        />
 
-          <div class="colorSlot justify-center pt-4">
-            <div
-              class="colors justify-center pt-4"
-              v-for="colorProduct in show.colorBag"
-              :key="colorProduct.color"
-              :style="{ background: colorProduct.color }"
-            ></div>
-          </div>
-
-          <h3 class="text-black">{{ show.name }}</h3>
-          <h4 class="mb-10 font-extralight">{{ show.price }} $</h4>
+        <div class="colorSlot justify-center pt-4">
+          <div
+            class="colors justify-center pt-4"
+            v-for="colorProduct in show.colorBag"
+            :key="colorProduct.color"
+            :style="{ background: colorProduct.color }"
+          ></div>
         </div>
 
-        
+        <h3 class="text-black">{{ show.name }}</h3>
+        <h4 class="mb-10 font-extralight">{{ show.price }} $</h4>
       </div>
 
       <!-- popup -->
       <div
         v-if="show"
-        class="bg-black bg-opacity-90 info my-10 absolute w-full"
+        class="bg-black bg-opacity-90 info absolute w-full h-screen"
       >
         <div>
           <span class="material-icons" @click="clickShow"> close </span>
