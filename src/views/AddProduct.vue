@@ -68,16 +68,16 @@
                   Bag Type
                   <form name="dropdown" action="/action_page.php">
                     <select v-model="productType">
-                      <option>Mini Flap Bag</option>
-                      <option>The Fae Bag</option>
-                      <option>Gabbi Bag</option>
-                      <option>Rantan Bag</option>
-                      <option>Envelope Bag</option>
-                      <option>Eva Shoulder Bag</option>
-                      <option>Maze Bag</option>
-                      <option>Mila Shoulder Bag</option>
-                      <option>Quinn Phone Bag</option>
-                      <option>Cloud Top Bag</option>
+                      <option value="Mini Flap Bag">Mini Flap Bag</option>
+                      <option value="The Fae Bag">The Fae Bag</option>
+                      <option value="Gabbi Bag">Gabbi Bag</option>
+                      <option value="Rantan Bag">Rantan Bag</option>
+                      <option value="Envelope Bag">Envelope Bag</option>
+                      <option value="Eva Shoulder Bag">Eva Shoulder Bag</option>
+                      <option value="Maze Bag">Maze Bag</option>
+                      <option value="Mila Shoulder Bag">Mila Shoulder Bag</option>
+                      <option value="Quinn Phone Bag">Quinn Phone Bag</option>
+                      <option value="Cloud Top Bag">Cloud Top Bag</option>
                     </select>
                   </form>
                 </div>

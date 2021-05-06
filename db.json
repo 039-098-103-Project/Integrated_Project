@@ -6,7 +6,10 @@
       "inStockDate": "2021-02-02",
       "productDescrip": "Hydrating color reviver lip balm",
       "imageName": "CTB.jpg",
-      "bagType": "Mini Flap Bag",
+      "bagType": {
+        "bagTypeId": 1,
+        "bagTypeName": "Mini Flap Bag"
+    },
       "colors": [
         {
           "colorName": "#FEA46D",
@@ -29,7 +32,10 @@
       "inStockDate": "2021-02-02",
       "productDescrip": "Hydrating color reviver lip balm",
       "imageName": "ESB-Croc.jpg",
-      "bagType": "Mini Flap Bag",
+      "bagType": {
+        "bagTypeId": 1,
+        "bagTypeName": "Mini Flap Bag"
+    },
       "colors": [
         {
           "colorName": "#FFF3E4",
@@ -48,7 +54,10 @@
       "inStockDate": "2021-02-02",
       "productDescrip": "Hydrating color reviver lip balm",
       "imageName": "MFB-Croc.jpg",
-      "bagType": "Mini Flap Bag",
+      "bagType": {
+        "bagTypeId": 1,
+        "bagTypeName": "Mini Flap Bag"
+    },
       "colors": [
         {
           "colorName": "#242423",
@@ -67,7 +76,10 @@
       "inStockDate": "2021-02-02",
       "productDescrip": "Hydrating color reviver lip balm",
       "imageName": "MSB.jpg",
-      "bagType": "Mini Flap Bag",
+      "bagType": {
+        "bagTypeId": 1,
+        "bagTypeName": "Mini Flap Bag"
+    },
       "colors": [
         {
           "colorName": "#ffbfcb",
@@ -86,7 +98,10 @@
       "inStockDate": "2021-02-02",
       "productDescrip": "Hydrating color reviver lip balm",
       "imageName": "EB-Croc.jpg",
-      "bagType": "Mini Flap Bag",
+      "bagType": {
+        "bagTypeId": 1,
+        "bagTypeName": "Mini Flap Bag"
+    },
       "colors": [
         {
           "colorName": "#FEA46D",
@@ -109,7 +124,10 @@
       "inStockDate": "2021-02-02",
       "productDescrip": "Hydrating color reviver lip balm",
       "imageName": "QPB.jpg",
-      "bagType": "Mini Flap Bag",
+      "bagType": {
+        "bagTypeId": 1,
+        "bagTypeName": "Mini Flap Bag"
+    },
       "colors": [
         {
           "colorName": "#F9E37C",
@@ -132,7 +150,10 @@
       "inStockDate": "2021-02-02",
       "productDescrip": "Hydrating color reviver lip balm",
       "imageName": "MFB-Lizard.jpg",
-      "bagType": "Mini Flap Bag",
+      "bagType": {
+        "bagTypeId": 1,
+        "bagTypeName": "Mini Flap Bag"
+    },
       "colors": [
         {
           "colorName": "#D18E64",
@@ -155,7 +176,10 @@
       "inStockDate": "2021-02-02",
       "productDescrip": "Hydrating color reviver lip balm",
       "imageName": "TFB-Croc.jpg",
-      "bagType": "Mini Flap Bag",
+      "bagType": {
+        "bagTypeId": 1,
+        "bagTypeName": "Mini Flap Bag"
+    },
       "colors": [
         {
           "colorName": "#F9E37C",
@@ -174,7 +198,10 @@
       "inStockDate": "2021-02-02",
       "productDescrip": "Hydrating color reviver lip balm",
       "imageName": "RB.jpg",
-      "bagType": "Mini Flap Bag",
+      "bagType": {
+        "bagTypeId": 1,
+        "bagTypeName": "Mini Flap Bag"
+    },
       "colors": [
         {
           "colorName": "#ABC3C7",
@@ -190,19 +217,6 @@
         }
       ],
       "id": 12
-    },
-    {
-      "productName": "drsegt",
-      "price": "5555",
-      "inStockDate": "2021-06-05",
-      "productDescrip": "afasdcsa",
-      "colors": [
-        "#BF8B3F",
-        "#F9E37C",
-        "#FEA46D"
-      ],
-      "bagType": "Gabbi Bag",
-      "id": 13
     }
   ]
 }

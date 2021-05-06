@@ -9,20 +9,20 @@
     <div class="grid grid-cols-4">
       <div class="my-12" v-for="show in products" :key="show.id">
         <img
-          :src="require(`../assets/Bag/${show.image}`)"
+          :src="require(`../assets/Bag/${show.imageName}`)"
           @click="showProduct(show.id)"
         />
 
         <div class="colorSlot justify-center pt-4">
           <div
             class="colors justify-center pt-4"
-            v-for="colorProduct in show.colorBag"
-            :key="colorProduct.color"
-            :style="{ background: colorProduct.color }"
+            v-for="colorProduct in show.colors"
+            :key="colorProduct.colorName"
+            :style="{ background: colorProduct.colorName }"
           ></div>
         </div>
 
-        <h3 class="text-black">{{ show.name }}</h3>
+        <h3 class="text-black">{{ show.productName }}</h3>
         <h4 class="mb-10 font-extralight">{{ show.price }} $</h4>
       </div>
 
@@ -31,33 +31,33 @@
         v-if="show"
         class="bg-black bg-opacity-90 info absolute w-full h-screen"
       >
-        <div>
-          <span class="material-icons" @click="clickShow"> close </span>
+        <div class="text-white flex justify-end px-10 py-8 text-lg" @click="clickShow">
+          X
         </div>
         <div v-for="product in popupProduct" :key="product.id">
           <img
-            :src="require(`../assets/Bag/${product.image}`)"
+            :src="require(`../assets/Bag/${product.imageName}`)"
             class="showImage"
           />
           <p>
-            {{ product.name }}
+            {{ product.productName }}
           </p>
           <div class="colorSlot">
             <div
               class="colors"
-              v-for="showColor in product.colorBag"
-              :key="showColor.idColor"
-              :style="{ background: showColor.color }"
+              v-for="showColor in product.colors"
+              :key="showColor.colorName"
+              :style="{ background: showColor.colorName }"
             ></div>
           </div>
           <p>
             {{ product.price }}
           </p>
           <p>
-            {{ product.date }}
+            {{ product.inStockDate }}
           </p>
           <p>
-            {{ product.description }}
+            {{ product.productDescrip }}
           </p>
           <button class="bg-green-500" @click="ediProduct(product)">
             EDIT
@@ -90,14 +90,14 @@ export default {
     return {
       products: [],
       popupProduct: [],
-      url: " http://localhost:5000/products",
-      image: "",
+      url: "http://localhost:5000/products",
+      imageName: "",
       price: null,
-      name: "",
-      colorBag: [],
-      description: "",
-      date: null,
-      type: "",
+      productName: "",
+      colors: [],
+      productDescrip: "",
+      inStockDate: null,
+      bagType: "",
       show: false,
       edit: false,
       delete: false,
@@ -118,12 +118,16 @@ export default {
 
     clickShow() {
       this.show = !this.show;
+      if (this.show) {
+        window.scrollTo(0, 0);
+      }
     },
 
-    async showProduct(productId) {
+    async showProduct(id) {
       try {
+        console.log(id);
         this.popupProduct = [];
-        const res = await fetch(`${this.url}/${productId}`);
+        const res = await fetch(`${this.url}/${id}`);
         const data = await res.json();
         this.popupProduct.push(data);
         this.clickShow();
@@ -135,12 +139,12 @@ export default {
 
     editProduct(product) {
       this.edit = true;
-      this.name = product.name;
+      this.productName = product.productName;
       this.price = product.price;
-      this.description = product.description;
-      this.type = product.type;
-      this.date = product.date;
-      this.color = product.color;
+      this.productDescrip = product.productDescrip;
+      this.bagType = product.bagType;
+      this.inStockDate = product.inStockDate;
+      this.colors = product.colors;
 
       this.submitEdit = product;
     },
@@ -152,12 +156,12 @@ export default {
           "Content-type": "application/json",
         },
         body: JSON.stringify({
-          name: this.name,
+          productName: this.productName,
           price: this.price,
-          type: this.type,
-          description: this.description,
-          date: this.date,
-          colorBag: this.colorBag,
+          bagType: this.bagType,
+          productDescrip: this.productDescrip,
+          inStockDate: this.inStockDate,
+          colors: this.colors,
         }),
       });
       const data = await res.json();
@@ -165,37 +169,33 @@ export default {
         product.id === data.id
           ? {
               ...product,
-              name: data.name,
+              productName: data.productName,
               price: data.price,
-              description: data.description,
-              type: data.type,
-              colorBag: data.colorBag,
-              date: data.date,
+              productDescrip: data.productDescrip,
+              productType: data.productType,
+              colors: data.colors,
+              inStockDate: data.inStockDate,
             }
           : product
       );
-      (this.name = ""),
+      (this.productName = ""),
         (this.price = null),
-        (this.type = ""),
-        (this.description = ""),
-        (this.colorBag = []),
-        (this.date = null),
+        (this.productType = ""),
+        (this.productDescrip = ""),
+        (this.colors = []),
+        (this.inStockDate = null),
         (this.edit = false),
         (this.editSubmit = null);
     },
 
-    // clickDelete() {
-    //   this.delete = !this.delete;
-    // },
-
-    async deleteProduct(productId) {
+    async deleteProduct(id) {
       if (confirm(`Are you sure to delete ?`)) {
-        const res = await fetch(`${this.url}/${productId}`, {
+        const res = await fetch(`${this.url}/${id}`, {
           method: "DELETE",
         });
         res.status === 200
           ? (this.products = this.products.filter(
-              (product) => product.productId !== productId
+              (product) => product.id !== id
             ))
           : alert("Error to delete product");
       }
@@ -204,6 +204,16 @@ export default {
 
   async created() {
     this.products = await this.getProduct();
+  },
+
+  watch: {
+    show: function () {
+      if (this.show) {
+        document.documentElement.style.overflow = "hidden";
+        return;
+      }
+      document.documentElement.style.overflow = "auto";
+    },
   },
 };
 </script>
