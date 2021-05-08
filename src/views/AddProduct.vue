@@ -118,7 +118,7 @@
         <div class="flex justify-center">
           <button
             class="bg-green-500 rounded-lg px-4 py-2"
-            @click="addProduct">
+            @click="submitFrom">
             SUBMIT
           </button>
         </div>
@@ -184,11 +184,11 @@ export default {
     submitFrom() {
       this.inputName = this.productName === "" ? true : false;
       this.inputPrice = this.productPrice === null || this.productPrice === "" ? true : false;
-      this.inputColor = this.productColor === [] ? true : false;
-      this.inputType = this.productType === "" ? true : false;
+      this.inputColor = this.colorsSelect.length == 0 ? true : false;
+      this.inputType = this.selectType === null ? true : false;
+      console.log(this.colorsSelect);
       this.inputDate = this.productDate === "" ? true : false;
       this.inputDescription = this.productDescreiption === "" ? true : false;
-      this.addProduct();
       if (
         this.inputName ||
         this.inputPrice ||
@@ -200,7 +200,7 @@ export default {
         return;
       }
       this.inputPrice = parseFloat(this.productPrice);
-
+      this.addProduct();
     },
 
     async addProduct() {

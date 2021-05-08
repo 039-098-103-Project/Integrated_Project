@@ -11,7 +11,8 @@ module.exports = {
         fuchsia: colors.fuchsia,
         beer: '#BF8B3F',
         ice: '#ABC3C7',
-        pink: '#FFE1E1'
+        pink: '#FFE1E1',
+        darkPurple: '10002b',
       }
     }
   },

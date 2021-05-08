@@ -98,8 +98,8 @@
             <!-- edit -->
             <div v-else>
               <form @submit.prevent="editSubmit(submitEdit)">
-                <div>
-                  <div class="mb-6 grid grid-cols-2">
+                <div class="form mr-20">
+                  <div class="mb-4 grid grid-cols-2">
                     <div>
                       <div>
                         <p>Product Name</p>
@@ -127,7 +127,7 @@
                   </div>
                   <sup v-show="inputPrice"> Please enter product price! </sup>
 
-                  <div class="mb-6 grid grid-cols-2">
+                  <div class="mb-4 grid grid-cols-2">
                     <div class="">
                       Bag Type
                       <form name="dropdown">
@@ -156,7 +156,7 @@
                   <div>Color</div>
                   <div class="mb-6 flex justify-start">
                     <label
-                      class="checkbox rounded"
+                      class="checkbox rounded mr-2"
                       v-for="color in colors"
                       :key="color.id"
                       :style="{ background: color.colorName }"
@@ -178,8 +178,8 @@
                     <p class="">Description</p>
                     <textarea
                       v-model="productDescrip"
-                      class="w-full h-40 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md break-words text-justify whitespace-normal px-4 py-2"
-                      type="text"
+                      class="w-full h-40 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md break-words text-justify whitespace-normal pr-12 py-2"
+                      style="height:140px"
                       placeholder="Description..."
                     />
                   </div>
@@ -187,10 +187,10 @@
                     Please enter description!
                   </sup>
 
-                  <div class="grid grid-cols-2">
-                    <button class="bg-green-500">CONFIRM</button>
+                  <div class="grid grid-cols-2 ">
+                    <button class="bg-green-500 rounded-lg py-2 mx-16">CONFIRM</button>
                     <button
-                      class="bg-red-500"
+                      class="bg-red-500 rounded-lg py-2 mx-16"
                       @click="hiddenEdit = !hiddenEdit"
                     >
                       CANCLE
@@ -256,6 +256,16 @@ export default {
       }
     },
 
+    async getBagType() {
+      try {
+        const response = await fetch("http://localhost:5000/bagType");
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     clickShow() {
       this.show = !this.show;
       this.hiddenEdit = false;
@@ -283,10 +293,10 @@ export default {
       this.productName = product.productName;
       this.price = product.price;
       this.productDescrip = product.productDescrip;
-      this.bagType = product.bagType;
+      this.selectType = product.bagType;
       this.inStockDate = product.inStockDate;
-      this.colors = product.colors;
-
+      this.selectColor = product.colors;
+      console.log(this.selectColor)
       this.submitEdit = product;
     },
 
@@ -346,6 +356,7 @@ export default {
   async created() {
     this.products = await this.getProduct();
     this.colors = await this.getData();
+    this.bagType = await this.getBagType();
   },
 
   watch: {
@@ -416,5 +427,9 @@ h4 {
 
 .checkbox > input:checked {
   border: 2px solid red;
+}
+.form{
+  font-family: "Mitr", sans-serif;
+  font-size: 13px;
 }
 </style>
