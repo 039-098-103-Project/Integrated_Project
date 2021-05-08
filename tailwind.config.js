@@ -7,12 +7,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        sea: '#0fa9e6',
         fuchsia: colors.fuchsia,
         beer: '#BF8B3F',
         ice: '#ABC3C7',
         pink: '#FFE1E1',
-        darkPurple: '10002b',
+        grayFigma: '#414535',
+
       }
     }
   },

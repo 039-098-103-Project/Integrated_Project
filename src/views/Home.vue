@@ -1,16 +1,16 @@
 <template>
-  <navbar/> 
-  <footer/>
-  <div class="container flex justify-center">
-    <img src="../../src/assets/bg-img.jpg" style="width: 100%" class=""/>
-
-    <div class="textcenter">
-      <div class="text-sm mb-4">C O D</div>
-      <div class="tred text-6xl mb-5">Treding For Spring</div>
-      <div>Product By JW PEI</div>
+  <navbar />
+  <footer />
+  <div class="parallax">
+    <div class="container flex justify-center">
+      <div class="textcenter">
+        <div class="text-sm mb-4">C O D</div>
+        <div class="tred text-6xl mb-5">Treding For Spring</div>
+        <div class="mb-48">Product By JW PEI</div>
+        <Footer />
+      </div>
     </div>
   </div>
- <Footer/>
 </template>
 
 
@@ -18,19 +18,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap");
 
 .container {
-  position: relative;
+  /* position: relative; */
   text-align: center;
   color: white;
 }
 .textcenter {
   position: absolute;
-  top: 50%;
+  top: 100%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-family: "Mitr", sans-serif;
 }
-
-
+.parallax {
+  background-image: url("../../src/assets/bg-img.jpg");
+  background-attachment: fixed;
+  min-height: 700px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 </style>
 
 // <script>
@@ -50,4 +56,5 @@
 //     delay: 1000
 //   });
 
-// </script>
+//
+</script>

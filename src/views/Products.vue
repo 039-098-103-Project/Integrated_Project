@@ -104,10 +104,10 @@
                       <div>
                         <p>Product Name</p>
                       </div>
-                      <div>
+                      <div class="mr-10">
                         <input
                           v-model="productName"
-                          class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md"
+                          class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none focus:ring-grayFigma focus:border-transparent focus:ring-2 px-4 rounded border border-grayFigma"
                           type="text"
                           placeholder="Product Name"
                         />
@@ -118,7 +118,7 @@
                     <div>
                       <p class="">Price</p>
                       <input
-                        class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md"
+                        class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none focus:ring-grayFigma focus:border-transparent focus:ring-2 px-4 rounded border border-grayFigma"
                         type="number"
                         placeholder="Price"
                         v-model="price"

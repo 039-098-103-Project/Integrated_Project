@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center sticky top-0 z-10 bg-gradient-to-r from-gray-900 via-gray-800 to-indigo-900">
+  <div class="flex justify-center sticky top-0 z-10 bg-black ">
     <div>
       <div class="py-6 flex justify-center">
         <p>JW PEI</p>

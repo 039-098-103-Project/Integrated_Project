@@ -36,52 +36,56 @@
                   <div>
                     <p>Product Name</p>
                   </div>
-                  <div>
+                  <div class="mr-10">
                     <input
                       v-model="productName"
-                      class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md"
+                      class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none focus:ring-grayFigma focus:border-transparent focus:ring-2 px-4 rounded border border-grayFigma"
                       type="text"
-                      placeholder="Product Name"
+                      placeholder=""
                     />
                   </div>
+                  <sup v-show="inputName"> Please enter product name! </sup>
                 </div>
-                <sup v-show="inputName"> Please enter product name! </sup>
+                
 
                 <div>
                   <p class="">Price</p>
                   <input
-                    class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md"
+                    class="w-full placeholder-gray-500 placeholder-opacity-50 border border-grayFigma focus:outline-none focus:ring-beer focus:border-transparent focus:ring-2 px-4 rounded"
                     type="number"
-                    placeholder="Price"
+                    placeholder=""
                     v-model="productPrice"
                   />
+                  <sup v-show="inputPrice"> Please enter product price! </sup>
                 </div>
               </div>
-              <sup v-show="inputPrice"> Please enter product price! </sup>
+              
 
               <div class="mb-6 grid grid-cols-2">
-                <div class="">
+                <div >
                   Bag Type
-                  <form name="dropdown">
-                    <select v-model="selectType" >
+                  <form name="dropdown" >
+                    <select v-model="selectType" class="selectDrop shadow-md rounded py-1 px-4">
                         <option v-for="bagType in productType" :value="bagType" :key="bagType.id">
                           {{ bagType.bagTypeName }}</option>
                     </select>
                   </form>
-
-                  <!-- {{ selectType }} -->
+                  <sup v-show="inputType"> Please select type! </sup>
                 </div>
+
                 <div class="justify-end">
                   <p class="">Will Be In Stock On</p>
-                  <input
-                    class="border border-black rounded"
+                  <div>
+                   <input
+                    class="border border-grayFigma rounded px-4"
                     type="date"
                     v-model="productDate"
-                  />
+                  /> 
+                  </div>
+                  <sup v-show="inputDate"> Please select stock date! </sup>
                 </div>
               </div>
-              <sup v-show="inputDate"> Please enter stock date! </sup>
-
+              
               <div>Color</div>
               <div class="mb-6 flex justify-between">
                 <label
@@ -96,6 +100,7 @@
                     v-model="colorsSelect"
                   />
                 </label>
+                
               </div>
               <sup v-show="inputColor">
                 Please enter product color more than one!
@@ -105,22 +110,26 @@
               <div class="mb-6">
                 <p class="">Description</p>
                 <textarea v-model="productDescreiption"
-                  class="w-full h-40 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md break-words text-justify whitespace-normal px-4 py-2"
+                  class="w-full h-40 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-beer focus:border-transparent focus:ring-2 shadow-md break-words text-justify whitespace-normal px-4 py-2 border border-grayFigma"
                   style="height:150px"
                   placeholder="Description...">
                 </textarea>
+                <sup v-show="inputDescription"> Please enter description! </sup>
               </div>
-              <sup v-show="inputDescription"> Please enter description! </sup>
+              
             </div>
           </form>
         </div>
 
-        <div class="flex justify-center">
-          <button
-            class="bg-green-500 rounded-lg px-4 py-2"
+        <div class="flex justify-center ">
+          <div class="bg-white group"> 
+            <button
+            class="text-blue-500 border border-blue-600 px-4 py-2 group-hover:text-white group-hover:bg-blue-600 rounded"
             @click="submitFrom">
-            SUBMIT
+            Submit
           </button>
+          </div>
+          
         </div>
       </div>
     </div>
@@ -131,7 +140,7 @@
 export default {
   data() {
     return {
-      // urlData: null,
+      urlData: null,
       check: false,
       url: "http://localhost:5000/products",
       inputName: false,
@@ -153,10 +162,11 @@ export default {
   },
 
   methods: {
-    // selectFile(e) {
-    //   const file = e.target.files[0];
-    //   this.urlData = URL.createObjectURL(file);
-    // },
+    selectFile(e) {
+      const file = e.target.files[0];
+      this.urlData = URL.createObjectURL(file);
+    },
+
     async getData() {
       try {
         const response = await fetch("http://localhost:5000/colors");
@@ -268,5 +278,13 @@ export default {
 }
 sup {
   color: red;
+}
+.selectDrop{
+  color: black;
+  background: transparent;
+  border-color: black;
+}
+.selectDrop::before{
+  border-color: black;
 }
 </style>

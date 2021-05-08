@@ -1,25 +1,48 @@
 <template>
   <navbar />
 
-  <div class="mx-20 my-36">
-    <div class="flex justify-between px-16">
-      <div class="inline">
+  <div class="mx-20 my-10">
+    <p class="flex justify-center">Teams</p>
+    <h6 class="mt-1 text-center text-sm">
+        Integrated Project - INT221 Integrated Information Technology Project
+      </h6>
+
+    <div class="mt-14 grid grid-cols-2">
+      <div class="flex justify-center">
         <img src="../../src/assets/Teams/jeab.jpg" />
-        <h1 class="flex justify-center mt-6">62130500039</h1>
-        <h2 class="flex justify-center">Thanyaluck Ngamchaipisit</h2>
-        <h class="flex justify-center">Back-End , DevOps</h>
       </div>
-      <div class="inline">
+      <div class="flex items-center justify-center">
+        <div class="mx-10">
+          <h1>Back-End and Devops</h1>
+          <h2>62130500039</h2>
+          <h2 class="">Thanyaluck Ngamchaipisit</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 grid grid-cols-2">
+      <div class="flex items-center justify-center">
+        <div class="mx-10">
+          <h1>Database and Devops</h1>
+          <h2>62130500039</h2>
+          <h2 class="">Thanyaluck Ngamchaipisit</h2>
+        </div>
+      </div>
+      <div class="flex justify-center">
         <img src="../../src/assets/Teams/gift.jpg" />
-        <h1 class="flex justify-center mt-6">62130500098</h1>
-        <h2 class="flex justify-center">Sunanta Singka</h2>
-        <h2 class="flex justify-center">Database , DevOps</h2>
       </div>
-      <div class="inline">
+    </div>
+
+    <div class="mt-10 grid grid-cols-2">
+      <div class="flex justify-center">
         <img src="../../src/assets/Teams/mel.jpg" />
-        <h1 class="flex justify-center mt-6">62130500103</h1>
-        <h2 class="flex justify-center">Apisara Ngakor</h2>
-        <h2 class="flex justify-center">Front-End</h2>
+      </div>
+      <div class="flex items-center justify-center">
+        <div class="mx-10">
+          <h1>Front-End</h1>
+          <h2>62130500039</h2>
+          <h2 class="">Thanyaluck Ngamchaipisit</h2>
+        </div>
       </div>
     </div>
   </div>
@@ -36,12 +59,17 @@ img {
 }
 h1 {
   font-family: "Rajdhani", sans-serif;
-  font-size: 18px;
+  width: 600;
+  font-size: 30px;
 }
-h2 {
+h6 {
   font-family: "Rajdhani", sans-serif;
-  font-size: 18px;
-  letter-spacing: 1px;
-
+  width: 300;
+  font-size: 15px;
+}
+p {
+  font-family: "Rajdhani", sans-serif;
+  width: 600;
+  font-size: 30px;
 }
 </style>
