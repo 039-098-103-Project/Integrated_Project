@@ -1,52 +1,26 @@
 {
   "products": [
     {
-      "productName": "Cloud Top Bag",
-      "price": "21.25",
-      "inStockDate": "2021-02-02",
-      "productDescrip": "Hydrating color reviver lip balm",
-      "imageName": "CTB.jpg",
-      "bagType": {
-        "bagTypeId": 1,
-        "bagTypeName": "Mini Flap Bag"
-    },
-      "colors": [
-        {
-          "colorName": "#FEA46D",
-          "colorId": 1
-        },
-        {
-          "colorName": "#D18E64",
-          "colorId": 2
-        },
-        {
-          "colorName": "#FFF3E4",
-          "colorId": 3
-        }
-      ],
-      "id": 2
-    },
-    {
       "productName": "Evalope Bag",
       "price": "15.5",
       "inStockDate": "2021-02-02",
-      "productDescrip": "Hydrating color reviver lip balm",
+      "productDescrip": "Lizard-Embossed  Vegan Leather 100% Recycled Plastic Lining 7.9'' W × 6.1'' D × 3.1'' H (20cm x 15.5cm x 8cm) 16.9''（43cm）Handle Drop Detachable Strap (Unadjustable) Gold Hardware Push-Lock Closure 2 Interior Pockets 1 Zipping Pocket Imported",
       "imageName": "ESB-Croc.jpg",
-      "bagType": {
-        "bagTypeId": 1,
-        "bagTypeName": "Mini Flap Bag"
-    },
+      "id": 5,
       "colors": [
         {
-          "colorName": "#FFF3E4",
-          "colorId": 3
+          "colorName": "#242423",
+          "colorId": 1
         },
         {
-          "colorName": "#F9E37C",
-          "colorId": 4
+          "colorName": "#FEA46D",
+          "id": 10
+        },
+        {
+          "colorName": "#242423",
+          "colorId": 1
         }
-      ],
-      "id": 5
+      ]
     },
     {
       "productName": "Evalope Bag",
@@ -54,21 +28,21 @@
       "inStockDate": "2021-02-02",
       "productDescrip": "Hydrating color reviver lip balm",
       "imageName": "MFB-Croc.jpg",
-      "bagType": {
-        "bagTypeId": 1,
-        "bagTypeName": "Mini Flap Bag"
-    },
+      "id": 6,
       "colors": [
         {
           "colorName": "#242423",
-          "colorId": 5
+          "colorId": 1
         },
         {
-          "colorName": "#D18E64",
-          "colorId": 2
+          "colorName": "#242423",
+          "colorId": 1
+        },
+        {
+          "colorName": "#242423",
+          "colorId": 1
         }
-      ],
-      "id": 6
+      ]
     },
     {
       "productName": "Evalope Bag",
@@ -76,21 +50,21 @@
       "inStockDate": "2021-02-02",
       "productDescrip": "Hydrating color reviver lip balm",
       "imageName": "MSB.jpg",
-      "bagType": {
-        "bagTypeId": 1,
-        "bagTypeName": "Mini Flap Bag"
-    },
+      "id": 7,
       "colors": [
         {
-          "colorName": "#ffbfcb",
-          "colorId": 6
+          "colorName": "#242423",
+          "colorId": 1
         },
         {
-          "colorName": "#F9E37C",
-          "colorId": 4
+          "colorName": "#242423",
+          "colorId": 1
+        },
+        {
+          "colorName": "#242423",
+          "colorId": 1
         }
-      ],
-      "id": 7
+      ]
     },
     {
       "productName": "Evalope Bag",
@@ -98,25 +72,21 @@
       "inStockDate": "2021-02-02",
       "productDescrip": "Hydrating color reviver lip balm",
       "imageName": "EB-Croc.jpg",
-      "bagType": {
-        "bagTypeId": 1,
-        "bagTypeName": "Mini Flap Bag"
-    },
+      "id": 8,
       "colors": [
         {
-          "colorName": "#FEA46D",
+          "colorName": "#242423",
           "colorId": 1
         },
         {
-          "colorName": "#D18E64",
-          "colorId": 2
+          "colorName": "#242423",
+          "colorId": 1
         },
         {
-          "colorName": "#FFF3E4",
-          "colorId": 3
+          "colorName": "#242423",
+          "colorId": 1
         }
-      ],
-      "id": 8
+      ]
     },
     {
       "productName": "Evalope Bag",
@@ -124,25 +94,21 @@
       "inStockDate": "2021-02-02",
       "productDescrip": "Hydrating color reviver lip balm",
       "imageName": "QPB.jpg",
-      "bagType": {
-        "bagTypeId": 1,
-        "bagTypeName": "Mini Flap Bag"
-    },
+      "id": 9,
       "colors": [
         {
-          "colorName": "#F9E37C",
-          "colorId": 4
+          "colorName": "#242423",
+          "colorId": 1
         },
         {
-          "colorName": "#FFF3E4",
-          "colorId": 3
+          "colorName": "#242423",
+          "colorId": 1
         },
         {
-          "colorName": "#ABC3C7",
-          "colorId": 7
+          "colorName": "#242423",
+          "colorId": 1
         }
-      ],
-      "id": 9
+      ]
     },
     {
       "productName": "Evalope Bag",
@@ -150,25 +116,21 @@
       "inStockDate": "2021-02-02",
       "productDescrip": "Hydrating color reviver lip balm",
       "imageName": "MFB-Lizard.jpg",
-      "bagType": {
-        "bagTypeId": 1,
-        "bagTypeName": "Mini Flap Bag"
-    },
+      "id": 10,
       "colors": [
         {
-          "colorName": "#D18E64",
-          "colorId": 2
-        },
-        {
-          "colorName": "#BF8B3F",
-          "colorId": 8
+          "colorName": "#242423",
+          "colorId": 1
         },
         {
           "colorName": "#242423",
-          "colorId": 5
+          "colorId": 1
+        },
+        {
+          "colorName": "#242423",
+          "colorId": 1
         }
-      ],
-      "id": 10
+      ]
     },
     {
       "productName": "Evalope Bag",
@@ -176,47 +138,105 @@
       "inStockDate": "2021-02-02",
       "productDescrip": "Hydrating color reviver lip balm",
       "imageName": "TFB-Croc.jpg",
-      "bagType": {
-        "bagTypeId": 1,
-        "bagTypeName": "Mini Flap Bag"
-    },
+      "id": 11,
       "colors": [
         {
-          "colorName": "#F9E37C",
-          "colorId": 4
+          "colorName": "#242423",
+          "colorId": 1
         },
         {
-          "colorName": "#D18E64",
-          "colorId": 2
+          "colorName": "#242423",
+          "colorId": 1
+        },
+        {
+          "colorName": "#242423",
+          "colorId": 1
         }
-      ],
-      "id": 11
+      ]
+    }
+  ],
+  "colors": [
+    {
+      "colorName": "#242423",
+      "id": 1
     },
     {
-      "productName": "Evalope Bag",
-      "price": "15.5",
-      "inStockDate": "2021-02-02",
-      "productDescrip": "Hydrating color reviver lip balm",
-      "imageName": "RB.jpg",
-      "bagType": {
-        "bagTypeId": 1,
-        "bagTypeName": "Mini Flap Bag"
+      "colorName": "#BF8B3F",
+      "id": 2
     },
-      "colors": [
-        {
-          "colorName": "#ABC3C7",
-          "colorId": 7
-        },
-        {
-          "colorName": "#FFF3E4",
-          "colorId": 3
-        },
-        {
-          "colorName": "#7F8164",
-          "colorId": 9
-        }
-      ],
-      "id": 12
+    {
+      "colorName": "#7F8164",
+      "id": 3
+    },
+    {
+      "colorName": "#ffbfcb",
+      "id": 4
+    },
+    {
+      "colorName": "#ABC3C7",
+      "id": 5
+    },
+    {
+      "colorName": "#FFF3E4",
+      "id": 6
+    },
+    {
+      "colorName": "#D18E64",
+      "id": 7
+    },
+    {
+      "colorName": "#F9E37C",
+      "id": 8
+    },
+    {
+      "colorName": "#E7DCD5",
+      "id": 9
+    },
+    {
+      "colorName": "#FEA46D",
+      "id": 10
+    }
+  ],
+  "bagType": [
+    {
+      "id": 1,
+      "bagTypeName": "Mini Flap Bag"
+    },
+    {
+      "id": 2,
+      "bagTypeName": "The Fae Bag"
+    },
+    {
+      "id": 3,
+      "bagTypeName": "Gabbi Bag"
+    },
+    {
+      "id": 4,
+      "bagTypeName": "Rantan Bag"
+    },
+    {
+      "id": 5,
+      "bagTypeName": "Envelope Bag"
+    },
+    {
+      "id": 6,
+      "bagTypeName": "Eva Shoulder Bag"
+    },
+    {
+      "id": 7,
+      "bagTypeName": "Maze Bag"
+    },
+    {
+      "id": 8,
+      "bagTypeName": "Mila Shoulder Bag"
+    },
+    {
+      "id": 9,
+      "bagTypeName": "Quinn Phone Bag"
+    },
+    {
+      "id": 10,
+      "bagTypeName": "Cloud Top Bag"
     }
   ]
 }

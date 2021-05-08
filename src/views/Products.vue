@@ -29,51 +29,178 @@
       <!-- popup -->
       <div
         v-if="show"
-        class="bg-black bg-opacity-90 info absolute w-full h-screen"
+        class="bg-black bg-opacity-75 info absolute w-full h-screen"
       >
-        <div class="text-white flex justify-end px-10 py-8 text-lg" @click="clickShow">
+        <div
+          class="text-white flex justify-end px-10 pt-10 pb-4 text-3xl exit"
+          @click="clickShow"
+        >
           X
         </div>
-        <div v-for="product in popupProduct" :key="product.id">
-          <img
-            :src="require(`../assets/Bag/${product.imageName}`)"
-            class="showImage"
-          />
-          <p>
-            {{ product.productName }}
-          </p>
-          <div class="colorSlot">
-            <div
-              class="colors"
-              v-for="showColor in product.colors"
-              :key="showColor.colorName"
-              :style="{ background: showColor.colorName }"
-            ></div>
-          </div>
-          <p>
-            {{ product.price }}
-          </p>
-          <p>
-            {{ product.inStockDate }}
-          </p>
-          <p>
-            {{ product.productDescrip }}
-          </p>
-          <button class="bg-green-500" @click="ediProduct(product)">
-            EDIT
-          </button>
-          <button class="bg-red-500" @click="deleteProduct(product.id)">
-            DELETE
-          </button>
-        </div>
-      </div>
 
-      <!-- edit -->
-      <div
-        v-if="edit"
-        class="bg-black bg-opacity-90 info my-10 absolute w-full"
-      >
-        <form @submit.prevent="editSubmit(submitEdit)"></form>
+        <div class="flex justify-center">
+          <div
+            class="popwhite grid grid-cols-2 bg-white w-4/5 py-12"
+            v-for="product in popupProduct"
+            :key="product.id"
+          >
+            <div>
+              <img
+                :src="require(`../assets/Bag/${product.imageName}`)"
+                class="showImage items-center"
+              />
+            </div>
+
+            <div class="py-2" v-if="hiddenEdit == false">
+              <p class="text-xs">JW PEI</p>
+              <p class="text-3xl">
+                {{ product.productName }}
+              </p>
+              <p>{{ product.price }} $</p>
+
+              <div class="colorSlot py-2">
+                <div
+                  class="colors"
+                  v-for="showColor in product.colors"
+                  :key="showColor.colorName"
+                  :style="{ background: showColor.colorName }"
+                ></div>
+              </div>
+
+              <p class="mt-6 text-base font-bold">
+                Will Be In Stock On {{ product.inStockDate }}
+              </p>
+              <p class="text-sm text-justify pr-20">
+                {{ product.productDescrip }}
+              </p>
+              <div class="grid grid-cols-2 pt-28">
+                <div class="flex justify-center">
+                  <button
+                    class="bg-green-500 px-6 py-1 rounded"
+                    @click="hiddenEdit = !hiddenEdit && editProduct(product)"
+                    :class="{ show: hiddenEdit == false }"
+                  >
+                    EDIT
+                  </button>
+                </div>
+
+                <div class="flex justify-start">
+                  <button
+                    class="bg-red-500 px-6 py-1 rounded"
+                    @click="deleteProduct(product.id)"
+                  >
+                    DELETE
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- edit -->
+            <div v-else>
+              <form @submit.prevent="editSubmit(submitEdit)">
+                <div>
+                  <div class="mb-6 grid grid-cols-2">
+                    <div>
+                      <div>
+                        <p>Product Name</p>
+                      </div>
+                      <div>
+                        <input
+                          v-model="productName"
+                          class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md"
+                          type="text"
+                          placeholder="Product Name"
+                        />
+                      </div>
+                    </div>
+                    <sup v-show="inputName"> Please enter product name! </sup>
+
+                    <div>
+                      <p class="">Price</p>
+                      <input
+                        class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md"
+                        type="number"
+                        placeholder="Price"
+                        v-model="price"
+                      />
+                    </div>
+                  </div>
+                  <sup v-show="inputPrice"> Please enter product price! </sup>
+
+                  <div class="mb-6 grid grid-cols-2">
+                    <div class="">
+                      Bag Type
+                      <form name="dropdown">
+                        <select v-model="selectType">
+                          <option
+                            v-for="bagType in bagType"
+                            :value="bagType"
+                            :key="bagType.id"
+                          >
+                            {{ bagType.bagTypeName }}
+                          </option>
+                        </select>
+                      </form>
+                    </div>
+                    <div class="justify-end">
+                      <p class="">Will Be In Stock On</p>
+                      <input
+                        class="border border-black rounded"
+                        type="date"
+                        v-model="inStockDate"
+                      />
+                    </div>
+                  </div>
+                  <sup v-show="inputDate"> Please enter stock date! </sup>
+
+                  <div>Color</div>
+                  <div class="mb-6 flex justify-start">
+                    <label
+                      class="checkbox rounded"
+                      v-for="color in colors"
+                      :key="color.id"
+                      :style="{ background: color.colorName }"
+                    >
+                      <input
+                        type="checkbox"
+                        :value="color"
+                        v-model="selectColor"
+                      />
+
+                    </label>
+                  </div>
+                  <sup v-show="inputColor">
+                    Please enter product color more than one!
+                  </sup>
+
+                  {{ colorsSelect }}
+                  <div class="mb-6">
+                    <p class="">Description</p>
+                    <textarea
+                      v-model="productDescrip"
+                      class="w-full h-40 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md break-words text-justify whitespace-normal px-4 py-2"
+                      type="text"
+                      placeholder="Description..."
+                    />
+                  </div>
+                  <sup v-show="inputDescription">
+                    Please enter description!
+                  </sup>
+
+                  <div class="grid grid-cols-2">
+                    <button class="bg-green-500">CONFIRM</button>
+                    <button
+                      class="bg-red-500"
+                      @click="hiddenEdit = !hiddenEdit"
+                    >
+                      CANCLE
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -97,10 +224,13 @@ export default {
       colors: [],
       productDescrip: "",
       inStockDate: null,
-      bagType: "",
+      bagType: null,
+      ColorsSelect: null,
+      hiddenEdit: false,
       show: false,
-      edit: false,
       delete: false,
+      selectColor: [],
+      selectType: null,
       submitEdit: null,
     };
   },
@@ -116,10 +246,21 @@ export default {
       }
     },
 
+    async getData() {
+      try {
+        const response = await fetch("http://localhost:5000/colors");
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     clickShow() {
       this.show = !this.show;
+      this.hiddenEdit = false;
       if (this.show) {
-        window.scrollTo(0, 0);
+        window.scrollTo(450, 100);
       }
     },
 
@@ -138,7 +279,7 @@ export default {
     },
 
     editProduct(product) {
-      this.edit = true;
+      this.hiddenEdit = true;
       this.productName = product.productName;
       this.price = product.price;
       this.productDescrip = product.productDescrip;
@@ -158,10 +299,10 @@ export default {
         body: JSON.stringify({
           productName: this.productName,
           price: this.price,
-          bagType: this.bagType,
+          bagType: this.selectType,
           productDescrip: this.productDescrip,
           inStockDate: this.inStockDate,
-          colors: this.colors,
+          colors: this.selectColor,
         }),
       });
       const data = await res.json();
@@ -172,7 +313,7 @@ export default {
               productName: data.productName,
               price: data.price,
               productDescrip: data.productDescrip,
-              productType: data.productType,
+              productType: data.selectType,
               colors: data.colors,
               inStockDate: data.inStockDate,
             }
@@ -204,6 +345,7 @@ export default {
 
   async created() {
     this.products = await this.getProduct();
+    this.colors = await this.getData();
   },
 
   watch: {
@@ -248,7 +390,31 @@ h4 {
   width: 100%;
 }
 .showImage {
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
+}
+.popwhite {
+  border-radius: 30px;
+}
+.exit {
+  cursor: pointer;
+}
+.checkbox {
+  display: flex;
+  cursor: pointer;
+  border-radius: 50px;
+}
+.checkbox > input {
+  height: 25px;
+  width: 25px;
+  appearance: none;
+  outline: none;
+  transition-duration: 0.3s;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+.checkbox > input:checked {
+  border: 2px solid red;
 }
 </style>

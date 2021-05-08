@@ -45,41 +45,31 @@
                     />
                   </div>
                 </div>
-                <sup v-show="inputName">
-                  Please enter product name!
-                </sup>
+                <sup v-show="inputName"> Please enter product name! </sup>
 
                 <div>
                   <p class="">Price</p>
                   <input
                     class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md"
-                    type="text"
+                    type="number"
                     placeholder="Price"
                     v-model="productPrice"
                   />
                 </div>
               </div>
-              <sup v-show="inputPrice">
-                  Please enter product price!
-                </sup>
+              <sup v-show="inputPrice"> Please enter product price! </sup>
 
               <div class="mb-6 grid grid-cols-2">
                 <div class="">
                   Bag Type
-                  <form name="dropdown" action="/action_page.php">
-                    <select v-model="productType">
-                      <option value="Mini Flap Bag">Mini Flap Bag</option>
-                      <option value="The Fae Bag">The Fae Bag</option>
-                      <option value="Gabbi Bag">Gabbi Bag</option>
-                      <option value="Rantan Bag">Rantan Bag</option>
-                      <option value="Envelope Bag">Envelope Bag</option>
-                      <option value="Eva Shoulder Bag">Eva Shoulder Bag</option>
-                      <option value="Maze Bag">Maze Bag</option>
-                      <option value="Mila Shoulder Bag">Mila Shoulder Bag</option>
-                      <option value="Quinn Phone Bag">Quinn Phone Bag</option>
-                      <option value="Cloud Top Bag">Cloud Top Bag</option>
+                  <form name="dropdown">
+                    <select v-model="selectType" >
+                        <option v-for="bagType in productType" :value="bagType" :key="bagType.id">
+                          {{ bagType.bagTypeName }}</option>
                     </select>
                   </form>
+
+                  <!-- {{ selectType }} -->
                 </div>
                 <div class="justify-end">
                   <p class="">Will Be In Stock On</p>
@@ -90,50 +80,45 @@
                   />
                 </div>
               </div>
-              <sup v-show="inputDate">
-                  Please enter stock date!
-              </sup>
+              <sup v-show="inputDate"> Please enter stock date! </sup>
 
               <div>Color</div>
               <div class="mb-6 flex justify-between">
                 <label
                   class="checkbox rounded"
-                  v-for="color in colors"
+                  v-for="color in productColor"
                   :key="color.id"
-                  :style="{ background: color.id }"
+                  :style="{ background: color.colorName }"
                 >
                   <input
                     type="checkbox"
-                    :value="color.id"
-                    v-model="productColor"
+                    :value="color"
+                    v-model="colorsSelect"
                   />
                 </label>
               </div>
               <sup v-show="inputColor">
-                  Please enter product color more than one!
-                </sup>
+                Please enter product color more than one!
+              </sup>
 
+              <!-- {{ colorsSelect }} -->
               <div class="mb-6">
                 <p class="">Description</p>
-                <input
-                  v-model="productDescreiption"
-                  class="w-full h-40 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md break-words text-justify whitespace-normal"
-                  type="text"
-                  placeholder="Description..."
-                />
+                <textarea v-model="productDescreiption"
+                  class="w-full h-40 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md break-words text-justify whitespace-normal px-4 py-2"
+                  style="height:150px"
+                  placeholder="Description...">
+                </textarea>
               </div>
-              <sup v-show="inputDescription">
-                  Please enter description!
-                </sup>
+              <sup v-show="inputDescription"> Please enter description! </sup>
             </div>
           </form>
         </div>
 
         <div class="flex justify-center">
           <button
-            class="bg-green-500 rounded-lg px-4 py-2 my-10"
-            @click="addProduct"
-          >
+            class="bg-green-500 rounded-lg px-4 py-2"
+            @click="addProduct">
             SUBMIT
           </button>
         </div>
@@ -147,19 +132,6 @@ export default {
   data() {
     return {
       // urlData: null,
-      colors: [
-        { id: "#242423" },
-        { id: "#7F8164" },
-        { id: "#BF8B3F" },
-        { id: "#D18E64" },
-        { id: "#FFF3E4" },
-        { id: "#E7DCD5" },
-        { id: "#FEA46D" },
-        { id: "#F9E37C" },
-        { id: "#ffbfcb" },
-        { id: "#ABC3C7" },
-      ],
-      enteredDate: "",
       check: false,
       url: "http://localhost:5000/products",
       inputName: false,
@@ -169,12 +141,14 @@ export default {
       inputDate: false,
       inputDescription: false,
       products: [],
+      colorsSelect: [],
       productName: "",
       productPrice: null,
       productDescreiption: "",
-      productType: "",
-      productColor: [],
       productDate: "",
+      productColor: [],
+      productType: null,
+      selectType: null,
     };
   },
 
@@ -183,6 +157,25 @@ export default {
     //   const file = e.target.files[0];
     //   this.urlData = URL.createObjectURL(file);
     // },
+    async getData() {
+      try {
+        const response = await fetch("http://localhost:5000/colors");
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async getBagType() {
+      try {
+        const response = await fetch("http://localhost:5000/bagType");
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
 
     checkColor() {
       this.check = !this.check;
@@ -190,25 +183,23 @@ export default {
 
     submitFrom() {
       this.inputName = this.productName === "" ? true : false;
-      this.inputPrice = this.productPrice === null ? true : false;
+      this.inputPrice = this.productPrice === null || this.productPrice === "" ? true : false;
       this.inputColor = this.productColor === [] ? true : false;
       this.inputType = this.productType === "" ? true : false;
       this.inputDate = this.productDate === "" ? true : false;
       this.inputDescription = this.productDescreiption === "" ? true : false;
       this.addProduct();
-      this.productName = "";
-      this.productPrice = null;
-      if(
+      if (
         this.inputName ||
         this.inputPrice ||
         this.inputColor ||
         this.inputType ||
         this.inputDate ||
         this.inputDescription
-      ){
+      ) {
         return;
       }
-      this.inputPrice = parseInt(this.inputPrice);
+      this.inputPrice = parseFloat(this.productPrice);
 
     },
 
@@ -223,9 +214,8 @@ export default {
             inStockDate: this.productDate,
             productDescrip: this.productDescreiption,
             // imageName: ""
-            bagType: this.productType,
-            colors: this.productColor,
-            
+            bagType: this.selectType,
+            colors: this.colorsSelect,
           }),
         });
 
@@ -241,6 +231,14 @@ export default {
       }
     },
   },
+  async created() {
+    this.productColor = await this.getData();
+    this.productType = await this.getBagType();
+  },
+
+  computed: {
+    
+  },
 };
 </script>
 
@@ -252,22 +250,23 @@ export default {
 .checkbox {
   display: flex;
   cursor: pointer;
+  border-radius: 50px;
 }
 
 .checkbox > input {
   height: 30px;
   width: 30px;
   appearance: none;
-  border-radius: 4px;
   outline: none;
   transition-duration: 0.3s;
   cursor: pointer;
+  border-radius: 50px;
 }
 
 .checkbox > input:checked {
   border: 2px solid red;
 }
-sup{
+sup {
   color: red;
 }
 </style>

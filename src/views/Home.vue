@@ -2,7 +2,7 @@
   <navbar/> 
   <footer/>
   <div class="container flex justify-center">
-    <img src="../../src/assets/bg-img.jpg" style="width: 100%" />
+    <img src="../../src/assets/bg-img.jpg" style="width: 100%" class=""/>
 
     <div class="textcenter">
       <div class="text-sm mb-4">C O D</div>
