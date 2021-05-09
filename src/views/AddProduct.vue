@@ -27,7 +27,7 @@
         />
       </label>
 
-      <div>
+      <div class="content">
         <div>
           <form @submit.prevent="submitForm">
             <div>
@@ -252,7 +252,24 @@ export default {
 };
 </script>
 
+
 <style scoped>
+@media only screen and (max-width:800px) {
+  /* For tablets: */
+  .main {
+    width: 80%;
+    padding: 0;
+  }
+  .right {
+    width: 100%;
+  }
+}
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .navbar, .preview, .content {
+    width: 100%;
+  }
+}
 #preview img {
   width: 100%;
 }

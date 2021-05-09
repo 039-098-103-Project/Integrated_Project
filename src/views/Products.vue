@@ -6,7 +6,7 @@
       <navProducts />
     </div>
 
-    <div class="grid grid-cols-4">
+    <div class="grid grid-cols-4 content">
       <div class="my-12" v-for="show in products" :key="show.id">
         <img
           :src="require(`../assets/Bag/${show.imageName}`)"
@@ -373,6 +373,13 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap");
+
+@media only screen and (max-width:500px) {
+  /* For mobile phones: */
+  .navbar, .navProducts, .content {
+    width: 100%;
+  }
+}
 
 img {
   width: 80%;

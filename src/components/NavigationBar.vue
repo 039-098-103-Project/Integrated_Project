@@ -1,14 +1,27 @@
 <template>
-  <div class="flex justify-center sticky top-0 z-10 bg-black ">
-    <div>
-      <div class="py-6 flex justify-center">
-        <p>JW PEI</p>
+  <div class="navbar sticky top-0 z-10 bg-black ">
+    <p class="brand py-4 flex justify-center">JW PEI</p>
+
+    <div class="link pb-2 text-white flex justify-center">
+      <div>
+        <router-link to="/" class="hover:text-indigo-300 inline"
+          >Home</router-link
+        >
       </div>
-      <div class="space-x-44 pb-4 text-white ">
-        <router-link to="/" class="hover:text-indigo-300">Home</router-link>
-        <router-link to="/products" class="hover:text-indigo-400">Products</router-link>
-        <router-link to="/about" class="hover:text-indigo-400">About</router-link>
-        <router-link to="/team" class="hover:text-indigo-500">Team</router-link>
+      <div>
+        <router-link to="/products" class="hover:text-indigo-400 inline"
+          >Products</router-link
+        >
+      </div>
+      <div>
+        <router-link to="/about" class="hover:text-indigo-400 inline"
+          >About</router-link
+        >
+      </div>
+      <div>
+        <router-link to="/team" class="hover:text-indigo-500 inline"
+          >Team</router-link
+        >
       </div>
     </div>
   </div>
@@ -19,15 +32,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Mitr:wght@200&display=swap");
 
-div {
-  font-size: 20px;
+.link {
   font-family: "Mitr", sans-serif;
   text-decoration: none;
-  /* background-color: #1c1c1c; */
-}
+  @apply text-xs  space-x-8 sm:text-base sm:space-x-20 md:space-x-36 lg:text-2xl lg:space-x-44
+} 
 p {
   font-family: "Bebas Neue", sans-serif;
-  font-size: 36px;
   color: white;
+  @apply text-xl md:text-2xl lg:text-3xl
 }
+
 </style>

@@ -1,23 +1,26 @@
 <template>
-  <div class="pb-20 pt-16">
-    <hr class="ml-14" />
-    <div class="space-x-20 flex justify-center pt-16">
+  <div class="footer pb-20 pt-16">
+    <hr class="" />
+
+    <div class="socail flex justify-center pt-4">
       <a href="https://www.instagram.com/jwpei_official/" target="_blank">
         <img src="../../src/assets/Contact/instagram.png" />
       </a>
+
       <a href="https://www.facebook.com/jwpei.th/" target="_blank">
         <img src="../../src/assets/Contact/facebook.png" />
       </a>
+
       <a href="https://www.pinterest.com/jw_pei/_shop/" target="_blank">
         <img src="../../src/assets/Contact/pinterest.png" />
       </a>
     </div>
-    <div class="flex justify-center pt-16">
+
+    <div class="contact flex justify-center pt-8">
       <div>
-       <p class="text-lg font-bold">CONTACT US</p>
-      <p class="text-sm pt-2 font-normal">cs_th@jwpei.com</p> 
+        <p class="contactUs">CONTACT US</p>
+        <p class="email">cs_th@jwpei.com</p>
       </div>
-      
     </div>
   </div>
 </template>
@@ -26,16 +29,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@600&display=swap");
 
 div {
-  font-size: 20px;
   font-family: "Rajdhani", sans-serif;
   color: #001233;
-  /* background-color: #414535; */
 }
 img {
-  width: 25px;
+  width: 15px;
+  @apply md:w-4;
+}
+.contactUs {
+  @apply text-xs font-bold flex justify-center;
+}
+.email {
+  @apply text-xs pt-1 font-normal flex justify-center;
+}
+
+.socail {
+  @apply space-x-4;
 }
 hr {
-  width: 1400px;
   border: 1px solid #001d4a;
+  @apply ml-4 mr-4 sm:ml-10 sm:mr-10 md:ml-12 md:mr-12 lg:ml-14 lg:mr-14
 }
 </style>
