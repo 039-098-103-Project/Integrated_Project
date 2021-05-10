@@ -1,6 +1,8 @@
 <template>
   <div class="navbar sticky top-0 z-10 bg-black ">
-    <p class="brand py-4 flex justify-center">JW PEI</p>
+    <div>
+      <p class="brand py-4 flex justify-center">JW PEI</p>
+    </div>
 
     <div class="link pb-2 text-white flex justify-center">
       <div>

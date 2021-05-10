@@ -30,6 +30,7 @@
   sm:transform sm:-translate-y-24 sm:-translate-x-32 sm:left-1/2 
   md:transform md:-translate-y-14 md:-translate-x-32 md:left-1/2
   lg:transform lg:-translate-y-9 lg:-translate-x-52 lg:left-1/2
+  xl:transform xl:-translate-y-2 xl:-translate-x-64
 }
 .cod {
   font-size: 6px;
@@ -37,7 +38,7 @@
 }
 .tred {
   font-size: 16px;
-  @apply mb-2 sm:text-3xl lg:text-5xl
+  @apply mb-2 sm:text-3xl lg:text-5xl xl:text-6xl
 }
 .jwpei{
   font-size: 8px;

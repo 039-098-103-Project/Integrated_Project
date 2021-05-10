@@ -40,7 +40,7 @@
                 <div class="">
                   <input
                     v-model="productName"
-                    class="inputDetail placeholder-gray-500 placeholder-opacity-50 focus:outline-none focus:ring-grayFigma focus:border-transparent focus:ring-2 rounded border border-grayFigma"
+                    class="inputDetail placeholder-gray-500 placeholder-opacity-50 focus:outline-none focus:ring-beer focus:border-transparent focus:ring-2 rounded border border-grayFigma"
                     type="text"
                     placeholder=""
                   />
@@ -89,7 +89,7 @@
                 <p class="title">Will Be In Stock On</p>
                 <div>
                   <input
-                    class="inputDetail drop border border-grayFigma rounded"
+                    class="inputDetail drop border border-grayFigma rounded focus:outline-none focus:ring-beer focus:border-transparent focus:ring-2"
                     type="date"
                     v-model="productDate"
                   />
@@ -147,7 +147,7 @@ export default {
     return {
       picture: null,
       check: false,
-      // url: "http://localhost:5000/products",
+      url: "http://localhost:5000/products",
       inputName: false,
       inputPrice: false,
       inputColor: false,
@@ -319,7 +319,7 @@ export default {
       formData.append("file", this.imgFile);
       formData.append("newProduct", blob);
       axios
-        .post("http://localhost:3000/addProduct", formData, {
+        .post("http://13.76.186.187/backend/addProduct", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -335,8 +335,14 @@ export default {
     this.getProduct();
   },
 
-  computed: {},
-};
+  // async created() {
+  //   // this.products = await this.getProduct();
+  //   this.productColor = await this.getData();
+  //   this.productType = await this.getBagType();
+  //   this.currentProduct = await this.getProduct();
+  // },
+
+  }
 </script>
 
 

@@ -40,8 +40,10 @@
               <img
                 v-if="hiddenEdit == false"
                 :src="getProductImg(product.imageName)"
+                
                 class="showImage"
               />
+              
               <div v-else>
                 <label
                   class="border-2 border-blue-800 h-80 w-80 flex flex-col items-center justify-center cursor-pointer rounded-lg shadow-lg"
@@ -281,7 +283,7 @@ export default {
       });
     },
     getProductImg(imageName) {
-      return "http://localhost:3000/img/" + imageName;
+      return "http://13.76.186.187/backend/img/" + imageName;
     },
     // async getData() {
     //   try {
@@ -469,7 +471,7 @@ export default {
       formData.append("file", this.imgFile);
       formData.append("newProduct", blob);
       axios
-        .put("http://localhost:3000/products/edit/" + pid, formData, {
+        .put("http://13.76.186.187/backend/products/edit/" + pid, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

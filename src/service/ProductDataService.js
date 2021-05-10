@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000";
+const API_URL = "http://13.76.186.187/backend";
 
 class ProductDataService {
     getAllProduct() {
