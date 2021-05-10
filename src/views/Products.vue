@@ -1,35 +1,35 @@
 <template>
   <navbar />
 
-  <div class="mx-20 relative">
-    <div class="pr-8 pt-10">
+  <div class="allProduct relative">
+    <div class="navProduct pt-6">
       <navProducts />
     </div>
 
-    <div class="grid grid-cols-4 content">
-      <div class="my-12" v-for="show in products" :key="show.id">
+    <div class="content">
+      <div class="mt-10" v-for="show in products" :key="show.id">
         <img
           :src="require(`../assets/Bag/${show.imageName}`)"
           @click="showProduct(show.id)"
         />
 
-        <div class="colorSlot justify-center pt-4">
+        <div class="colorSlot pt-4">
           <div
-            class="colors justify-center pt-4"
+            class="colors pt-4"
             v-for="colorProduct in show.colors"
             :key="colorProduct.colorName"
             :style="{ background: colorProduct.colorName }"
           ></div>
         </div>
 
-        <h3 class="text-black">{{ show.productName }}</h3>
-        <h4 class="mb-10 font-extralight">{{ show.price }} $</h4>
+        <h3 class="productName text-black">{{ show.productName }}</h3>
+        <h4 class="productPrice font-extralight">{{ show.price }} $</h4>
       </div>
 
       <!-- popup -->
       <div
         v-if="show"
-        class="bg-black bg-opacity-75 info absolute w-full h-screen"
+        class="popUp bg-black bg-opacity-75 info absolute w-full h-screen"
       >
         <div
           class="text-white flex justify-end px-10 pt-10 pb-4 text-3xl exit"
@@ -166,7 +166,6 @@
                         :value="color"
                         v-model="selectColor"
                       />
-
                     </label>
                   </div>
                   <sup v-show="inputColor">
@@ -179,7 +178,7 @@
                     <textarea
                       v-model="productDescrip"
                       class="w-full h-40 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md break-words text-justify whitespace-normal pr-12 py-2"
-                      style="height:140px"
+                      style="height: 140px"
                       placeholder="Description..."
                     />
                   </div>
@@ -187,8 +186,10 @@
                     Please enter description!
                   </sup>
 
-                  <div class="grid grid-cols-2 ">
-                    <button class="bg-green-500 rounded-lg py-2 mx-16">CONFIRM</button>
+                  <div class="grid grid-cols-2">
+                    <button class="bg-green-500 rounded-lg py-2 mx-16">
+                      CONFIRM
+                    </button>
                     <button
                       class="bg-red-500 rounded-lg py-2 mx-16"
                       @click="hiddenEdit = !hiddenEdit"
@@ -296,7 +297,7 @@ export default {
       this.selectType = product.bagType;
       this.inStockDate = product.inStockDate;
       this.selectColor = product.colors;
-      console.log(this.selectColor)
+      console.log(this.selectColor);
       this.submitEdit = product;
     },
 
@@ -374,38 +375,48 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap");
 
-@media only screen and (max-width:500px) {
+@media only screen and (max-width: 500px) {
   /* For mobile phones: */
-  .navbar, .navProducts, .content {
+  .navbar,
+  .navProducts,
+  .content {
     width: 100%;
   }
 }
-
+.content{
+  @apply grid grid-cols-2 sm:grid sm:grid-cols-4 md:grid md:grid-cols-4 lg:grid lg:grid-cols-4;
+}
 img {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
 }
-h3 {
+.productName {
   font-family: "Mitr", sans-serif;
   text-align: center;
-  padding-top: 18px;
+  padding-top: 10px;
+  font-size: 12px;
+  @apply sm:text-sm;
 }
-h4 {
+.productPrice {
   font-family: "Mitr", sans-serif;
   text-align: center;
-  padding-top: 14px;
+  padding-top: 6px;
+  font-size: 10px;
+  @apply sm:text-xs
 }
 .colors {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
+  width: 15px;
+  height: 15px;
   border-radius: 50px;
   transition: 0.6s linear;
+  align-items: center;
+   @apply mx-1 justify-center sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-5 lg:h-5
 }
 .colorSlot {
   display: flex;
   width: 100%;
+  @apply justify-center
 }
 .showImage {
   width: 400px;
@@ -435,8 +446,14 @@ h4 {
 .checkbox > input:checked {
   border: 2px solid red;
 }
-.form{
+.form {
   font-family: "Mitr", sans-serif;
   font-size: 13px;
+}
+.navProduct {
+  @apply flex justify-center sm:flex sm:justify-end lg:flex lg:justify-end;
+}
+.allProduct{
+  @apply mx-2 sm:mx-10 md:mx-20 lg:mx-20
 }
 </style>

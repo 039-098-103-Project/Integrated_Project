@@ -1,15 +1,17 @@
 <template>
   <navbar />
-  <div class="mx-44 py-10">
-    <navProducts />
+  <div class="content">
+    <div class="navProduct">
+      <navProducts />
+    </div>
 
-    <div class="grid grid-cols-2 my-12">
+    <div class="addProduct">
       <label
-        class="border-2 border-blue-800 h-80 w-80 flex flex-col items-center justify-center cursor-pointer rounded-lg shadow-lg"
+        class="upPic border-2 border-blue-800 flex-col items-center ursor-pointer rounded-lg shadow-lg"
         id="preview"
       >
         <svg
-          class="w-8 h-8"
+          class="w-4 h-4"
           fill="currentColor"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -46,7 +48,6 @@
                   </div>
                   <sup v-show="inputName"> Please enter product name! </sup>
                 </div>
-                
 
                 <div>
                   <p class="">Price</p>
@@ -59,15 +60,22 @@
                   <sup v-show="inputPrice"> Please enter product price! </sup>
                 </div>
               </div>
-              
 
               <div class="mb-6 grid grid-cols-2">
-                <div >
+                <div>
                   Bag Type
-                  <form name="dropdown" >
-                    <select v-model="selectType" class="selectDrop shadow-md rounded py-1 px-4">
-                        <option v-for="bagType in productType" :value="bagType" :key="bagType.id">
-                          {{ bagType.bagTypeName }}</option>
+                  <form name="dropdown">
+                    <select
+                      v-model="selectType"
+                      class="selectDrop shadow-md rounded py-1 px-4"
+                    >
+                      <option
+                        v-for="bagType in productType"
+                        :value="bagType"
+                        :key="bagType.id"
+                      >
+                        {{ bagType.bagTypeName }}
+                      </option>
                     </select>
                   </form>
                   <sup v-show="inputType"> Please select type! </sup>
@@ -76,16 +84,16 @@
                 <div class="justify-end">
                   <p class="">Will Be In Stock On</p>
                   <div>
-                   <input
-                    class="border border-grayFigma rounded px-4"
-                    type="date"
-                    v-model="productDate"
-                  /> 
+                    <input
+                      class="border border-grayFigma rounded px-4"
+                      type="date"
+                      v-model="productDate"
+                    />
                   </div>
                   <sup v-show="inputDate"> Please select stock date! </sup>
                 </div>
               </div>
-              
+
               <div>Color</div>
               <div class="mb-6 flex justify-between">
                 <label
@@ -100,7 +108,6 @@
                     v-model="colorsSelect"
                   />
                 </label>
-                
               </div>
               <sup v-show="inputColor">
                 Please enter product color more than one!
@@ -109,27 +116,28 @@
               <!-- {{ colorsSelect }} -->
               <div class="mb-6">
                 <p class="">Description</p>
-                <textarea v-model="productDescreiption"
+                <textarea
+                  v-model="productDescreiption"
                   class="w-full h-40 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-beer focus:border-transparent focus:ring-2 shadow-md break-words text-justify whitespace-normal px-4 py-2 border border-grayFigma"
-                  style="height:150px"
-                  placeholder="Description...">
+                  style="height: 150px"
+                  placeholder="Description..."
+                >
                 </textarea>
                 <sup v-show="inputDescription"> Please enter description! </sup>
               </div>
-              
             </div>
           </form>
         </div>
 
-        <div class="flex justify-center ">
-          <div class="bg-white group"> 
+        <div class="flex justify-center">
+          <div class="bg-white group">
             <button
-            class="text-blue-500 border border-blue-600 px-4 py-2 group-hover:text-white group-hover:bg-blue-600 rounded"
-            @click="submitFrom">
-            Submit
-          </button>
+              class="text-blue-500 border border-blue-600 px-4 py-2 group-hover:text-white group-hover:bg-blue-600 rounded"
+              @click="submitFrom"
+            >
+              Submit
+            </button>
           </div>
-          
         </div>
       </div>
     </div>
@@ -193,7 +201,8 @@ export default {
 
     submitFrom() {
       this.inputName = this.productName === "" ? true : false;
-      this.inputPrice = this.productPrice === null || this.productPrice === "" ? true : false;
+      this.inputPrice =
+        this.productPrice === null || this.productPrice === "" ? true : false;
       this.inputColor = this.colorsSelect.length == 0 ? true : false;
       this.inputType = this.selectType === null ? true : false;
       console.log(this.colorsSelect);
@@ -246,30 +255,12 @@ export default {
     this.productType = await this.getBagType();
   },
 
-  computed: {
-    
-  },
+  computed: {},
 };
 </script>
 
 
 <style scoped>
-@media only screen and (max-width:800px) {
-  /* For tablets: */
-  .main {
-    width: 80%;
-    padding: 0;
-  }
-  .right {
-    width: 100%;
-  }
-}
-@media only screen and (max-width:500px) {
-  /* For mobile phones: */
-  .navbar, .preview, .content {
-    width: 100%;
-  }
-}
 #preview img {
   width: 100%;
 }
@@ -296,12 +287,24 @@ export default {
 sup {
   color: red;
 }
-.selectDrop{
+.selectDrop {
   color: black;
   background: transparent;
   border-color: black;
 }
-.selectDrop::before{
+.selectDrop::before {
   border-color: black;
+}
+.navProduct {
+  @apply flex justify-center;
+}
+.content {
+  @apply mx-2 py-6;
+}
+.addProduct {
+  @apply grid grid-cols-1 py-4;
+}
+.upPic {
+  @apply w-40 h-40 flex justify-center;
 }
 </style>

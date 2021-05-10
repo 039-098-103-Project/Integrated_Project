@@ -33,14 +33,16 @@ div {
   color: #001233;
 }
 img {
-  width: 15px;
-  @apply md:w-4;
+  width: 12px;
+  @apply sm:w-3 md:w-4 lg:w-4;
 }
 .contactUs {
-  @apply text-xs font-bold flex justify-center;
+  font-size: 12px;
+  @apply font-bold flex justify-center;
 }
 .email {
-  @apply text-xs pt-1 font-normal flex justify-center;
+  font-size: 9px;
+  @apply pt-1 font-normal flex justify-center;
 }
 
 .socail {
