@@ -108,10 +108,13 @@
                         type="number"
                         placeholder="Price"
                         v-model="price"
+                        min="0"
+                        max="999.99"
                       />
                     </div>
                   </div>
                   <sup v-show="inputPrice"> Please enter product price! </sup>
+                  <sup v-show="hasDuplicate" > Duplicate name! </sup>
 
                   <div class="typeAndStock">
                     <div>
@@ -219,6 +222,8 @@ export default {
       selectColor: [],
       selectType: null,
       submitEdit: null,
+      currenProduct: [],
+      hasDuplicate: false,
     };
   },
 
@@ -251,6 +256,42 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+
+    checkDuplicateName(name) {
+      let duplicate = this.currenProduct.filter((p) => p.productName == name);
+      console.log(duplicate.length);
+      console.log(name);
+      if (duplicate.length > 0) {
+        return true;
+      } else return false;
+    },
+
+
+    submitFrom() {
+      this.inputName = this.productName === "" ? true : false;
+      this.inputPrice = this.productPrice === null || this.productPrice === "" ? true : false;
+      this.inputColor = this.colorsSelect.length == 0 ? true : false;
+      this.inputType = this.selectType === null ? true : false;
+      console.log(this.colorsSelect);
+      this.inputDate = this.productDate === "" ? true : false;
+      this.inputDescription = this.productDescreiption === "" ? true : false;
+      if(this.checkDuplicateName(this.productName)){
+        this.hasDuplicate = true;
+        return;
+      }
+      if (
+        this.inputName ||
+        this.inputPrice ||
+        this.inputColor ||
+        this.inputType ||
+        this.inputDate ||
+        this.inputDescription
+      ) {
+        return;
+      }
+      this.inputPrice = parseFloat(this.productPrice);
+      this.addProduct();
     },
 
     clickShow() {
@@ -344,6 +385,7 @@ export default {
     this.products = await this.getProduct();
     this.colors = await this.getData();
     this.bagType = await this.getBagType();
+    this.currenProduct = await this.getProduct();
   },
 
   watch: {

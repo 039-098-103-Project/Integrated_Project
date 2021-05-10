@@ -35,7 +35,7 @@
 .link {
   font-family: "Mitr", sans-serif;
   text-decoration: none;
-  @apply text-xs space-x-8 sm:text-xs sm:space-x-20 md:space-x-36 md:text-base lg:text-xl lg:space-x-44
+  @apply text-xs space-x-8 sm:text-xs  sm:space-x-20 md:space-x-36 md:text-base lg:text-xl lg:space-x-44
 } 
 p {
   font-family: "Bebas Neue", sans-serif;

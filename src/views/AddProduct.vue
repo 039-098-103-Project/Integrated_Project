@@ -45,7 +45,8 @@
                     placeholder=""
                   />
                 </div>
-                <sup v-show="inputName"> Please enter product name! </sup>
+                <sup v-show="inputName" > Please enter product name! </sup>
+                <sup v-show="hasDuplicate" > Duplicate name! </sup>
               </div>
 
               <div class="productPrice">
@@ -55,8 +56,12 @@
                   type="number"
                   placeholder=""
                   v-model="productPrice"
+                  min="0"
+                  max="999.99"
                 />
-                <sup v-show="inputPrice"> Please enter product price! </sup>
+                <div>
+                  <sup v-show="inputPrice"> Please enter product price! </sup>
+                </div>
               </div>
             </div>
 
@@ -158,6 +163,8 @@ export default {
       productType: null,
       selectType: null,
       preview: null,
+      currenProduct: [],
+      hasDuplicate: false,
     };
   },
 
@@ -193,19 +200,45 @@ export default {
       }
     },
 
+    async getProduct() {
+      try {
+        const res = await fetch(this.url);
+        const data = await res.json();
+        return data;
+      } catch (error) {
+        console.log(`Could not get! ${error}`);
+      }
+    },
+
     checkColor() {
       this.check = !this.check;
+    },
+
+    checkDuplicateName(name) {
+      let duplicate = this.currenProduct.filter((p) => p.productName == name);
+      console.log(duplicate.length);
+      console.log(name);
+      if (duplicate.length > 0) {
+        return true;
+      } else return false;
     },
 
     submitFrom() {
       this.inputName = this.productName === "" ? true : false;
       this.inputPrice =
         this.productPrice === null || this.productPrice === "" ? true : false;
+      this.inputPrice = this.productPrice <= 0 && this.productPrice < 999.99 ? true : false;
       this.inputColor = this.colorsSelect.length == 0 ? true : false;
       this.inputType = this.selectType === null ? true : false;
       console.log(this.colorsSelect);
       this.inputDate = this.productDate === "" ? true : false;
       this.inputDescription = this.productDescreiption === "" ? true : false;
+      console.log(this.checkDuplicateName(this.inputName));
+
+      if(this.checkDuplicateName(this.productName)){
+        this.hasDuplicate = true;
+        return;
+      }
       if (
         this.inputName ||
         this.inputPrice ||
@@ -218,6 +251,8 @@ export default {
       }
       this.inputPrice = parseFloat(this.productPrice);
       this.addProduct();
+      
+
     },
 
     async addProduct() {
@@ -252,6 +287,7 @@ export default {
   async created() {
     this.productColor = await this.getData();
     this.productType = await this.getBagType();
+    this.currenProduct = await this.getProduct();
   },
 
   computed: {},
@@ -263,14 +299,14 @@ export default {
 #preview img {
   width: 100%;
 }
-.allAdd{
-  @apply mx-1 sm:mx-8 md:mx-10 lg:mx-20
+.allAdd {
+  @apply mx-1 sm:mx-8 md:mx-10 lg:mx-20;
 }
 .content {
-  @apply justify-between py-6 text-xs ;
+  @apply justify-between py-6 text-xs;
 }
 .navProduct {
-  @apply flex justify-center mt-4 sm:flex sm:justify-center md:justify-end md:py-4 lg:py-6;
+  @apply flex justify-center mt-4 sm:flex sm:justify-center md:justify-end lg:py-6;
 }
 
 .checkbox {
