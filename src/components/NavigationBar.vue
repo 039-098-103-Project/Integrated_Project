@@ -35,12 +35,12 @@
 .link {
   font-family: "Mitr", sans-serif;
   text-decoration: none;
-  @apply text-xs space-x-8 sm:text-xs sm:space-x-20 md:space-x-36 lg:text-sm lg:space-x-24
+  @apply text-xs space-x-8 sm:text-xs sm:space-x-20 md:space-x-36 md:text-base lg:text-xl lg:space-x-44
 } 
 p {
   font-family: "Bebas Neue", sans-serif;
   color: white;
-  @apply text-xl md:text-2xl lg:text-xl
+  @apply text-xl md:text-2xl lg:text-4xl lg:py-10
 }
 
 </style>

@@ -1,6 +1,6 @@
 <template>
   <navbar />
-  <div class="content">
+  <div class="allAdd">
     <div class="navProduct">
       <navProducts />
     </div>
@@ -10,6 +10,7 @@
         class="upPic border-2 border-blue-800 flex-col items-center ursor-pointer rounded-lg shadow-lg"
         id="preview"
       >
+        <img :src="preview" />
         <svg
           class="w-4 h-4"
           fill="currentColor"
@@ -20,135 +21,124 @@
             d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"
           />
         </svg>
-        <span class="mt-2 text-base leading-normal">Upload a Image</span>
+        <span class="mt-2 leading-normal">Upload a Image</span>
         <input
           type="file"
           accept="image/*"
           @change="selectFile"
           class="hidden form-control-file"
         />
+        {{ imageName }}
       </label>
 
       <div class="content">
-        <div>
-          <form @submit.prevent="submitForm">
-            <div>
-              <div class="mb-6 grid grid-cols-2">
-                <div>
-                  <div>
-                    <p>Product Name</p>
-                  </div>
-                  <div class="mr-10">
-                    <input
-                      v-model="productName"
-                      class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none focus:ring-grayFigma focus:border-transparent focus:ring-2 px-4 rounded border border-grayFigma"
-                      type="text"
-                      placeholder=""
-                    />
-                  </div>
-                  <sup v-show="inputName"> Please enter product name! </sup>
-                </div>
-
-                <div>
-                  <p class="">Price</p>
+        <form @submit.prevent="submitForm">
+          <div>
+            <div class="nameAndPrice">
+              <div class="productName">
+                <p class="title">Product Name</p>
+                <div class="">
                   <input
-                    class="w-full placeholder-gray-500 placeholder-opacity-50 border border-grayFigma focus:outline-none focus:ring-beer focus:border-transparent focus:ring-2 px-4 rounded"
-                    type="number"
+                    v-model="productName"
+                    class="inputDetail placeholder-gray-500 placeholder-opacity-50 focus:outline-none focus:ring-grayFigma focus:border-transparent focus:ring-2 rounded border border-grayFigma"
+                    type="text"
                     placeholder=""
-                    v-model="productPrice"
                   />
-                  <sup v-show="inputPrice"> Please enter product price! </sup>
                 </div>
+                <sup v-show="inputName"> Please enter product name! </sup>
               </div>
 
-              <div class="mb-6 grid grid-cols-2">
-                <div>
-                  Bag Type
-                  <form name="dropdown">
-                    <select
-                      v-model="selectType"
-                      class="selectDrop shadow-md rounded py-1 px-4"
-                    >
-                      <option
-                        v-for="bagType in productType"
-                        :value="bagType"
-                        :key="bagType.id"
-                      >
-                        {{ bagType.bagTypeName }}
-                      </option>
-                    </select>
-                  </form>
-                  <sup v-show="inputType"> Please select type! </sup>
-                </div>
-
-                <div class="justify-end">
-                  <p class="">Will Be In Stock On</p>
-                  <div>
-                    <input
-                      class="border border-grayFigma rounded px-4"
-                      type="date"
-                      v-model="productDate"
-                    />
-                  </div>
-                  <sup v-show="inputDate"> Please select stock date! </sup>
-                </div>
-              </div>
-
-              <div>Color</div>
-              <div class="mb-6 flex justify-between">
-                <label
-                  class="checkbox rounded"
-                  v-for="color in productColor"
-                  :key="color.id"
-                  :style="{ background: color.colorName }"
-                >
-                  <input
-                    type="checkbox"
-                    :value="color"
-                    v-model="colorsSelect"
-                  />
-                </label>
-              </div>
-              <sup v-show="inputColor">
-                Please enter product color more than one!
-              </sup>
-
-              <!-- {{ colorsSelect }} -->
-              <div class="mb-6">
-                <p class="">Description</p>
-                <textarea
-                  v-model="productDescreiption"
-                  class="w-full h-40 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-beer focus:border-transparent focus:ring-2 shadow-md break-words text-justify whitespace-normal px-4 py-2 border border-grayFigma"
-                  style="height: 150px"
-                  placeholder="Description..."
-                >
-                </textarea>
-                <sup v-show="inputDescription"> Please enter description! </sup>
+              <div class="productPrice">
+                <p class="title">Price</p>
+                <input
+                  class="inputDetail placeholder-gray-500 placeholder-opacity-50 border border-grayFigma focus:outline-none focus:ring-beer focus:border-transparent focus:ring-2 px-4 rounded"
+                  type="number"
+                  placeholder=""
+                  v-model="productPrice"
+                />
+                <sup v-show="inputPrice"> Please enter product price! </sup>
               </div>
             </div>
-          </form>
-        </div>
 
-        <div class="flex justify-center">
-          <div class="bg-white group">
-            <button
-              class="text-blue-500 border border-blue-600 px-4 py-2 group-hover:text-white group-hover:bg-blue-600 rounded"
-              @click="submitFrom"
-            >
-              Submit
-            </button>
+            <div class="typeAndStock">
+              <div>
+                <p class="title">Bag Type</p>
+                <form name="dropdown">
+                  <select
+                    v-model="selectType"
+                    class="inputDetail selectDrop shadow-md rounded"
+                  >
+                    <option
+                      v-for="bagType in productType"
+                      :value="bagType.id"
+                      :key="bagType.id"
+                    >
+                      {{ bagType.bagTypeName }}
+                    </option>
+                  </select>
+                </form>
+                <sup v-show="inputType"> Please select type! </sup>
+              </div>
+
+              <div class="">
+                <p class="title">Will Be In Stock On</p>
+                <div>
+                  <input
+                    class="inputDetail drop border border-grayFigma rounded"
+                    type="date"
+                    v-model="productDate"
+                  />
+                </div>
+                <sup v-show="inputDate"> Please select stock date! </sup>
+              </div>
+            </div>
+
+            <div class="title">Color</div>
+            <div class="flex justify-between">
+              <label
+                class="checkbox rounded"
+                v-for="color in productColor"
+                :key="color.id"
+                :style="{ background: color.colorName }"
+              >
+                <input type="checkbox" :value="color" v-model="colorsSelect" />
+              </label>
+            </div>
+            <sup v-show="inputColor">
+              Please enter product color more than one!
+            </sup>
+
+            <div class="">
+              <p class="title">Description</p>
+              <textarea
+                v-model="productDescreiption"
+                class="inputDetail boxDescrip placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-beer focus:border-transparent focus:ring-2 shadow-md break-words text-justify whitespace-normal border border-grayFigma"
+                placeholder="Description..."
+              >
+              </textarea>
+              <sup v-show="inputDescription"> Please enter description! </sup>
+            </div>
           </div>
+        </form>
+
+        <div class="bg-white group submit">
+          <button
+            class="submitButton text-blue-500 border border-blue-600 group-hover:text-white group-hover:bg-blue-600 rounded"
+            @click="submitFrom"
+          >
+            Submit
+          </button>
         </div>
       </div>
     </div>
   </div>
 </template>
-
+*
 <script>
 export default {
   data() {
     return {
-      urlData: null,
+      picture: null,
       check: false,
       url: "http://localhost:5000/products",
       inputName: false,
@@ -157,6 +147,7 @@ export default {
       inputType: false,
       inputDate: false,
       inputDescription: false,
+      imageName: null,
       products: [],
       colorsSelect: [],
       productName: "",
@@ -166,13 +157,20 @@ export default {
       productColor: [],
       productType: null,
       selectType: null,
+      preview: null,
     };
   },
 
   methods: {
     selectFile(e) {
       const file = e.target.files[0];
-      this.urlData = URL.createObjectURL(file);
+      this.picture = URL.createObjectURL(file);
+      this.imageName = e.target.files[0].name;
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        this.preview = e.target.result;
+      };
+      reader.readAsDataURL(file);
     },
 
     async getData() {
@@ -232,7 +230,7 @@ export default {
             price: this.productPrice,
             inStockDate: this.productDate,
             productDescrip: this.productDescreiption,
-            // imageName: ""
+            imageName: this.picture,
             bagType: this.selectType,
             colors: this.colorsSelect,
           }),
@@ -245,6 +243,7 @@ export default {
         this.productDescreiption = "";
         this.productType = "";
         this.productColor = [];
+        this.imageName = null;
       } catch (error) {
         console.log(`Could not save! ${error}`);
       }
@@ -264,25 +263,34 @@ export default {
 #preview img {
   width: 100%;
 }
+.allAdd{
+  @apply mx-1 sm:mx-8 md:mx-10 lg:mx-20
+}
+.content {
+  @apply justify-between py-6 text-xs ;
+}
+.navProduct {
+  @apply flex justify-center mt-4 sm:flex sm:justify-center md:justify-end md:py-4 lg:py-6;
+}
 
 .checkbox {
   display: flex;
   cursor: pointer;
   border-radius: 50px;
+  @apply mb-2 lg:mb-4;
 }
 
 .checkbox > input {
-  height: 30px;
-  width: 30px;
   appearance: none;
   outline: none;
   transition-duration: 0.3s;
   cursor: pointer;
   border-radius: 50px;
+  @apply w-6 h-6 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-8 lg:h-8;
 }
 
 .checkbox > input:checked {
-  border: 2px solid red;
+  border: 1px solid red;
 }
 sup {
   color: red;
@@ -291,20 +299,42 @@ sup {
   color: black;
   background: transparent;
   border-color: black;
+  @apply w-full;
+}
+.drop {
+  @apply w-full;
 }
 .selectDrop::before {
   border-color: black;
 }
-.navProduct {
-  @apply flex justify-center;
-}
-.content {
-  @apply mx-2 py-6;
-}
 .addProduct {
-  @apply grid grid-cols-1 py-4;
+  @apply grid grid-cols-1 py-1 justify-items-stretch sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2;
+}
+.nameAndPrice {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2;
+}
+.typeAndStock {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2;
 }
 .upPic {
-  @apply w-40 h-40 flex justify-center;
+  @apply w-40 h-40 flex justify-center mt-4 text-sm justify-self-center 
+  sm:mt-8 sm:w-60 sm:h-60 sm:justify-self-start
+  md:justify-self-start md:ml-8 md:h-72 md:w-72 
+  lg:w-96 lg:h-96 lg:justify-self-start lg:text-base;
+}
+.title {
+  @apply mb-1 lg:text-base;
+}
+.inputDetail {
+  @apply px-2 py-1 mb-4 w-full sm:w-32 md:w-40 lg:w-56 lg:text-base;
+}
+.boxDescrip {
+  @apply w-full h-40 md:h-20 lg:h-32;
+}
+.submit {
+  @apply flex justify-center lg:text-base;
+}
+.submitButton {
+  @apply px-2 py-1;
 }
 </style>

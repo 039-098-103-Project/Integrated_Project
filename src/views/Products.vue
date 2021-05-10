@@ -2,12 +2,12 @@
   <navbar />
 
   <div class="allProduct relative">
-    <div class="navProduct pt-6">
+    <div class="navProduct">
       <navProducts />
     </div>
 
     <div class="content">
-      <div class="mt-10" v-for="show in products" :key="show.id">
+      <div class="product" v-for="show in products" :key="show.id">
         <img
           :src="require(`../assets/Bag/${show.imageName}`)"
           @click="showProduct(show.id)"
@@ -27,38 +27,30 @@
       </div>
 
       <!-- popup -->
-      <div
-        v-if="show"
-        class="popUp bg-black bg-opacity-75 info absolute w-full h-screen"
-      >
-        <div
-          class="text-white flex justify-end px-10 pt-10 pb-4 text-3xl exit"
-          @click="clickShow"
-        >
-          X
-        </div>
+      <div v-if="show" class="popUp bg-black bg-opacity-75 info">
+        <div class="exit text-white" @click="clickShow">X</div>
 
         <div class="flex justify-center">
           <div
-            class="popwhite grid grid-cols-2 bg-white w-4/5 py-12"
+            class="popwhite bg-white"
             v-for="product in popupProduct"
             :key="product.id"
           >
-            <div>
+            <div class="flex justify-center">
               <img
                 :src="require(`../assets/Bag/${product.imageName}`)"
-                class="showImage items-center"
+                class="showImage"
               />
             </div>
 
-            <div class="py-2" v-if="hiddenEdit == false">
-              <p class="text-xs">JW PEI</p>
-              <p class="text-3xl">
+            <div class="contentPop" v-if="hiddenEdit == false">
+              <p class="jwpei">JW PEI</p>
+              <p class="name">
                 {{ product.productName }}
               </p>
-              <p>{{ product.price }} $</p>
+              <p class="price">{{ product.price }} $</p>
 
-              <div class="colorSlot py-2">
+              <div class="colorSlot colorPop py-2">
                 <div
                   class="colors"
                   v-for="showColor in product.colors"
@@ -67,16 +59,15 @@
                 ></div>
               </div>
 
-              <p class="mt-6 text-base font-bold">
-                Will Be In Stock On {{ product.inStockDate }}
-              </p>
-              <p class="text-sm text-justify pr-20">
+              <p class="stock">Will Be In Stock On {{ product.inStockDate }}</p>
+              <p class="descrip">
                 {{ product.productDescrip }}
               </p>
-              <div class="grid grid-cols-2 pt-28">
-                <div class="flex justify-center">
+
+              <div class="editAndDelete">
+                <div class="edit">
                   <button
-                    class="bg-green-500 px-6 py-1 rounded"
+                    class="bg-green-500"
                     @click="hiddenEdit = !hiddenEdit && editProduct(product)"
                     :class="{ show: hiddenEdit == false }"
                   >
@@ -84,11 +75,8 @@
                   </button>
                 </div>
 
-                <div class="flex justify-start">
-                  <button
-                    class="bg-red-500 px-6 py-1 rounded"
-                    @click="deleteProduct(product.id)"
-                  >
+                <div class="delete">
+                  <button class="bg-red-500" @click="deleteProduct(product.id)">
                     DELETE
                   </button>
                 </div>
@@ -375,15 +363,7 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap");
 
-@media only screen and (max-width: 500px) {
-  /* For mobile phones: */
-  .navbar,
-  .navProducts,
-  .content {
-    width: 100%;
-  }
-}
-.content{
+.content {
   @apply grid grid-cols-2 sm:grid sm:grid-cols-4 md:grid md:grid-cols-4 lg:grid lg:grid-cols-4;
 }
 img {
@@ -403,7 +383,7 @@ img {
   text-align: center;
   padding-top: 6px;
   font-size: 10px;
-  @apply sm:text-xs
+  @apply sm:text-xs;
 }
 .colors {
   width: 15px;
@@ -411,23 +391,78 @@ img {
   border-radius: 50px;
   transition: 0.6s linear;
   align-items: center;
-   @apply mx-1 justify-center sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-5 lg:h-5
+  @apply mx-1 justify-center sm:w-4 sm:h-4 md:w-4 md:h-4 lg:w-5 lg:h-5;
 }
 .colorSlot {
   display: flex;
   width: 100%;
-  @apply justify-center
+  @apply justify-center;
 }
 .showImage {
-  width: 400px;
-  height: 400px;
+  /* width: 100px;
+  height: 100px; */
+  @apply w-28 h-28 md:w-52 md:h-52 md:items-center md:flex lg:w-80 lg:h-80;
 }
 .popwhite {
   border-radius: 30px;
+  @apply grid grid-cols-1  w-4/5 py-6 md:grid md:grid-cols-2 lg:py-12;
+}
+.popUp {
+  @apply absolute w-full h-screen;
 }
 .exit {
   cursor: pointer;
+  @apply flex justify-end px-4 pt-12 pb-4 text-sm sm:pt-12 md:text-base lg:pt-12 lg:mr-6 lg:text-2xl;
 }
+.contentPop {
+  @apply grid grid-cols-1;
+}
+.jwpei {
+  font-size: 8px;
+  @apply flex justify-center my-2 
+  md:flex md:justify-start
+  lg:text-xs lg:flex lg:justify-start lg:my-1;
+}
+.name {
+  @apply text-xs flex justify-center 
+  md:flex md:justify-start md:font-bold md:text-base
+  lg:text-xl lg:flex lg:justify-start lg:font-bold lg:text-2xl;
+}
+.price {
+  @apply text-xs flex justify-center 
+  md:flex md:justify-start
+  lg:text-base lg:flex lg:justify-start;
+}
+.colorPop{
+  @apply justify-center md:justify-start lg:justify-start
+}
+.stock {
+  font-size: 10px;
+  @apply flex justify-center font-bold 
+  md:flex md:justify-start md:text-xs md:font-bold
+  lg:text-sm lg:flex lg:justify-start;
+}
+.descrip {
+  font-size: 10px;
+  @apply mb-2 text-xs flex justify-center px-2 break-words py-2 
+  md:flex md:justify-start md:pl-0 md:text-xs
+  lg:text-sm lg:flex lg:justify-start lg:px-0 lg:pr-4;
+}
+.editAndDelete {
+  @apply grid grid-cols-2 flex justify-center sm:justify-center md:mr-4;
+}
+button {
+  @apply px-4 py-1.5 rounded;
+}
+.edit {
+  font-size: 10px;
+  @apply flex justify-center;
+}
+.delete {
+  font-size: 10px;
+  @apply flex justify-center;
+}
+
 .checkbox {
   display: flex;
   cursor: pointer;
@@ -451,9 +486,12 @@ img {
   font-size: 13px;
 }
 .navProduct {
-  @apply flex justify-center sm:flex sm:justify-end lg:flex lg:justify-end;
+  @apply mt-4 my-4 flex justify-center sm:flex sm:justify-end lg:flex lg:justify-end lg:my-10;
 }
-.allProduct{
-  @apply mx-2 sm:mx-10 md:mx-20 lg:mx-20
+.product {
+  @apply my-0 sm:mb-8 md:mb-10 lg:mb-12;
+}
+.allProduct {
+  @apply mx-2 sm:mx-10 md:mx-20 lg:mx-20;
 }
 </style>
