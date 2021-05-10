@@ -7,10 +7,10 @@
     </div>
 
     <div class="content">
-      <div class="product" v-for="show in products" :key="show.id">
+      <div class="product" v-for="show in products" :key="show.productId">
         <img
-          :src="require(`../assets/Bag/${show.imageName}`)"
-          @click="showProduct(show.id)"
+          :src="getProductImg(show.imageName)"
+          @click="showProduct(show.productId)"
         />
 
         <div class="colorSlot pt-4">
@@ -34,13 +34,41 @@
           <div
             class="popwhite bg-white"
             v-for="product in popupProduct"
-            :key="product.id"
+            :key="product.productId"
           >
             <div class="flex justify-center">
               <img
-                :src="require(`../assets/Bag/${product.imageName}`)"
+                v-if="hiddenEdit == false"
+                :src="getProductImg(product.imageName)"
                 class="showImage"
               />
+              <div v-else>
+                <label
+                  class="border-2 border-blue-800 h-80 w-80 flex flex-col items-center justify-center cursor-pointer rounded-lg shadow-lg"
+                  id="preview"
+                >
+                  <img :src="preview" />
+                  <svg
+                    class="w-8 h-8"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"
+                    />
+                  </svg>
+                  <span class="mt-2 text-base leading-normal"
+                    >Upload a Image</span
+                  >
+                  <input
+                    type="file"
+                    accept="image/*"
+                    @change="selectFile"
+                    class="hidden form-control-file"
+                  />
+                </label>
+              </div>
             </div>
 
             <div class="contentPop" v-if="hiddenEdit == false">
@@ -76,7 +104,10 @@
                 </div>
 
                 <div class="delete">
-                  <button class="bg-red-500" @click="deleteProduct(product.id)">
+                  <button
+                    class="bg-red-500"
+                    @click="deleteProduct(product.productId)"
+                  >
                     DELETE
                   </button>
                 </div>
@@ -98,7 +129,7 @@
                       />
                     </div>
                     <sup v-show="inputName"> Please enter product name! </sup>
-
+                    <sup v-show="hasDuplicate"> Duplicate name! </sup>
                     <div class="">
                       <div>
                         <p class="title">Price</p>
@@ -114,7 +145,6 @@
                     </div>
                   </div>
                   <sup v-show="inputPrice"> Please enter product price! </sup>
-                  <sup v-show="hasDuplicate" > Duplicate name! </sup>
 
                   <div class="typeAndStock">
                     <div>
@@ -124,7 +154,7 @@
                           <option
                             v-for="bagType in bagType"
                             :value="bagType"
-                            :key="bagType.id"
+                            :key="bagType.bagTypeId"
                           >
                             {{ bagType.bagTypeName }}
                           </option>
@@ -147,7 +177,7 @@
                     <label
                       class="checkbox rounded mr-2"
                       v-for="color in colors"
-                      :key="color.id"
+                      :key="color.colorId"
                       :style="{ background: color.colorName }"
                     >
                       <input
@@ -175,15 +205,19 @@
 
                   <div class="conAndCan">
                     <div class="edit">
-                      <button class="bg-green-500">CONFIRM</button>
+                      <input
+                        type="submit"
+                        value="CONFIRM"
+                        class="bg-green-500"
+                      />
                     </div>
                     <div class="delete">
-                      <button
+                      <input
+                        type="button"
+                        value="CANCEL"
                         class="bg-red-500"
-                        @click="hiddenEdit = !hiddenEdit"
-                      >
-                        CANCLE
-                      </button>
+                        @click="hideEdit"
+                      />
                     </div>
                   </div>
                 </div>
@@ -199,6 +233,8 @@
 </template>
 
 <script>
+import ProductDataService from "../service/ProductDataService";
+import axios from "axios";
 export default {
   name: "Products",
   components: {},
@@ -222,44 +258,69 @@ export default {
       selectColor: [],
       selectType: null,
       submitEdit: null,
-      currenProduct: [],
+      currentProduct: [],
       hasDuplicate: false,
+      imgFile: null,
+      preview: null,
     };
   },
 
   methods: {
-    async getProduct() {
-      try {
-        const res = await fetch(this.url);
-        const data = await res.json();
-        return data;
-      } catch (error) {
-        console.log(`Could not get! ${error}`);
-      }
+    // async getProduct() {
+    //   try {
+    //     const res = await fetch(this.url);
+    //     const data = await res.json();
+    //     return data;
+    //   } catch (error) {
+    //     console.log(`Could not get! ${error}`);
+    //   }
+    // },
+    getProduct() {
+      ProductDataService.getAllProduct().then((res) => {
+        this.products = res.data;
+      });
+    },
+    getProductImg(imageName) {
+      return "http://localhost:3000/img/" + imageName;
+    },
+    // async getData() {
+    //   try {
+    //     const response = await fetch("http://localhost:5000/colors");
+    //     const data = await response.json();
+    //     return data;
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
+    getData() {
+      ProductDataService.getColors().then((res) => {
+        this.colors = res.data;
+      });
     },
 
-    async getData() {
-      try {
-        const response = await fetch("http://localhost:5000/colors");
-        const data = await response.json();
-        return data;
-      } catch (error) {
-        console.log(error);
-      }
+    hideEdit() {
+      this.hiddenEdit = false;
+      this.preview = null;
     },
 
-    async getBagType() {
-      try {
-        const response = await fetch("http://localhost:5000/bagType");
-        const data = await response.json();
-        return data;
-      } catch (error) {
-        console.log(error);
-      }
+    // async getBagType() {
+    //   try {
+    //     const response = await fetch("http://localhost:5000/bagType");
+    //     const data = await response.json();
+    //     return data;
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
+
+    getBagType() {
+      ProductDataService.getBagTypes().then((res) => {
+        this.bagType = res.data;
+      });
     },
 
     checkDuplicateName(name) {
-      let duplicate = this.currenProduct.filter((p) => p.productName == name);
+      let duplicate = this.currentProduct.filter((p) => p.productName == name);
       console.log(duplicate.length);
       console.log(name);
       if (duplicate.length > 0) {
@@ -267,16 +328,16 @@ export default {
       } else return false;
     },
 
-
     submitFrom() {
       this.inputName = this.productName === "" ? true : false;
-      this.inputPrice = this.productPrice === null || this.productPrice === "" ? true : false;
+      // this.inputPrice =
+      // this.productPrice === null || this.productPrice === "" ? true : false;
       this.inputColor = this.colorsSelect.length == 0 ? true : false;
       this.inputType = this.selectType === null ? true : false;
       console.log(this.colorsSelect);
       this.inputDate = this.productDate === "" ? true : false;
       this.inputDescription = this.productDescreiption === "" ? true : false;
-      if(this.checkDuplicateName(this.productName)){
+      if (this.checkDuplicateName(this.productName)) {
         this.hasDuplicate = true;
         return;
       }
@@ -290,30 +351,52 @@ export default {
       ) {
         return;
       }
-      this.inputPrice = parseFloat(this.productPrice);
+      // this.inputPrice = parseFloat(this.productPrice);
       this.addProduct();
     },
 
     clickShow() {
       this.show = !this.show;
       this.hiddenEdit = false;
+      this.preview = [];
       if (this.show) {
         window.scrollTo(450, 100);
       }
     },
+    selectFile(e) {
+      const file = e.target.files[0];
+      this.picture = URL.createObjectURL(file);
+      this.imageName = file.name;
+      this.imgFile = file;
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        this.preview = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
 
-    async showProduct(id) {
-      try {
-        console.log(id);
-        this.popupProduct = [];
-        const res = await fetch(`${this.url}/${id}`);
-        const data = await res.json();
-        this.popupProduct.push(data);
-        this.clickShow();
-        return this.popupProduct;
-      } catch (error) {
-        console.log(`Could not show member info! ${error}`);
-      }
+    // async showProduct(id) {
+    //   try {
+    //     console.log(id);
+    //     this.popupProduct = [];
+    //     const res = await fetch(`${this.url}/${id}`);
+    //     const data = await res.json();
+    //     this.popupProduct.push(data);
+    //     this.clickShow();
+    //     return this.popupProduct;
+    //   } catch (error) {
+    //     console.log(`Could not show member info! ${error}`);
+    //   }
+    // },
+    showProduct(id) {
+      this.popupProduct = [];
+      var tmp = [];
+      ProductDataService.getProduct(id).then((res) => {
+        tmp = res.data;
+        this.popupProduct.push(tmp);
+      });
+
+      this.clickShow();
     },
 
     editProduct(product) {
@@ -328,64 +411,109 @@ export default {
       this.submitEdit = product;
     },
 
-    async editSubmit(editing) {
-      const res = await fetch(`${this.url}/${editing.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          productName: this.productName,
-          price: this.price,
-          bagType: this.selectType,
-          productDescrip: this.productDescrip,
-          inStockDate: this.inStockDate,
-          colors: this.selectColor,
-        }),
+    // async editSubmit(editing) {
+    //   const res = await fetch(`${this.url}/${editing.id}`, {
+    //     method: "PUT",
+    //     headers: {
+    //       "Content-type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       productName: this.productName,
+    //       price: this.price,
+    //       bagType: this.selectType,
+    //       productDescrip: this.productDescrip,
+    //       inStockDate: this.inStockDate,
+    //       colors: this.selectColor,
+    //     }),
+    //   });
+    //   const data = await res.json();
+    //   this.products = this.products.map((product) =>
+    //     product.id === data.id
+    //       ? {
+    //           ...product,
+    //           productName: data.productName,
+    //           price: data.price,
+    //           productDescrip: data.productDescrip,
+    //           productType: data.selectType,
+    //           colors: data.colors,
+    //           inStockDate: data.inStockDate,
+    //         }
+    //       : product
+    //   );
+    //   (this.productName = ""),
+    //     (this.price = null),
+    //     (this.productType = ""),
+    //     (this.productDescrip = ""),
+    //     (this.colors = []),
+    //     (this.inStockDate = null),
+    //     (this.edit = false),
+    //     (this.editSubmit = null);
+    // },
+    editSubmit(editing) {
+      const formData = new FormData();
+      let pid = editing.productId;
+      let data = {
+        productId: pid,
+        productName: this.productName,
+        price: this.price,
+        productDescrip: this.productDescrip,
+        inStockDate: this.inStockDate,
+        imageName: this.imageName,
+        bagType: this.selectType,
+        colors: this.selectColor,
+      };
+      const json = JSON.stringify(data);
+      const blob = new Blob([json], {
+        type: "application/json",
       });
-      const data = await res.json();
-      this.products = this.products.map((product) =>
-        product.id === data.id
-          ? {
-              ...product,
-              productName: data.productName,
-              price: data.price,
-              productDescrip: data.productDescrip,
-              productType: data.selectType,
-              colors: data.colors,
-              inStockDate: data.inStockDate,
-            }
-          : product
-      );
-      (this.productName = ""),
-        (this.price = null),
-        (this.productType = ""),
-        (this.productDescrip = ""),
-        (this.colors = []),
-        (this.inStockDate = null),
-        (this.edit = false),
-        (this.editSubmit = null);
+      formData.append("file", this.imgFile);
+      formData.append("newProduct", blob);
+      axios
+        .put("http://localhost:3000/products/edit/" + pid, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          res.status === 200
+            ? this.getProduct()
+            : alert("Error can't edit Product");
+        });
+      this.clickShow();
     },
 
-    async deleteProduct(id) {
-      if (confirm(`Are you sure to delete ?`)) {
-        const res = await fetch(`${this.url}/${id}`, {
-          method: "DELETE",
-        });
+    // async deleteProduct(id) {
+    //   if (confirm(`Are you sure to delete ?`)) {
+    //     const res = await fetch(`${this.url}/${id}`, {
+    //       method: "DELETE",
+    //     });
+    //     res.status === 200
+    //       ? (this.products = this.products.filter(
+    //           (product) => product.id !== id
+    //         ))
+    //       : alert("Error to delete product");
+    //   }
+    // },
+    deleteProduct(id) {
+      ProductDataService.deleteProduct(id).then((res) => {
         res.status === 200
-          ? (this.products = this.products.filter(
-              (product) => product.id !== id
-            ))
+          ? this.getProduct()
           : alert("Error to delete product");
-      }
+      });
+      this.clickShow();
     },
   },
 
-  async created() {
-    this.products = await this.getProduct();
-    this.colors = await this.getData();
-    this.bagType = await this.getBagType();
-    this.currenProduct = await this.getProduct();
+  // async created() {
+  //   this.products = await this.getProduct();
+  //   this.colors = await this.getData();
+  //   this.bagType = await this.getBagType();
+  //   this.currentProduct = await this.getProduct();
+  // },
+  created() {
+    this.getProduct();
+    this.getData();
+    this.getBagType();
   },
 
   watch: {

@@ -45,8 +45,8 @@
                     placeholder=""
                   />
                 </div>
-                <sup v-show="inputName" > Please enter product name! </sup>
-                <sup v-show="hasDuplicate" > Duplicate name! </sup>
+                <sup v-show="inputName"> Please enter product name! </sup>
+                <sup v-show="hasDuplicate"> Duplicate name! </sup>
               </div>
 
               <div class="productPrice">
@@ -75,8 +75,8 @@
                   >
                     <option
                       v-for="bagType in productType"
-                      :value="bagType.id"
-                      :key="bagType.id"
+                      :value="bagType"
+                      :key="bagType.bagTypeId"
                     >
                       {{ bagType.bagTypeName }}
                     </option>
@@ -103,7 +103,7 @@
               <label
                 class="checkbox rounded"
                 v-for="color in productColor"
-                :key="color.id"
+                :key="color.colorId"
                 :style="{ background: color.colorName }"
               >
                 <input type="checkbox" :value="color" v-model="colorsSelect" />
@@ -116,7 +116,7 @@
             <div class="">
               <p class="title">Description</p>
               <textarea
-                v-model="productDescreiption"
+                v-model="productDescription"
                 class="inputDetail boxDescrip placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-beer focus:border-transparent focus:ring-2 shadow-md break-words text-justify whitespace-normal border border-grayFigma"
                 placeholder="Description..."
               >
@@ -140,12 +140,14 @@
 </template>
 *
 <script>
+import ProductDataService from "../service/ProductDataService"
+import axios from "axios"
 export default {
   data() {
     return {
       picture: null,
       check: false,
-      url: "http://localhost:5000/products",
+      // url: "http://localhost:5000/products",
       inputName: false,
       inputPrice: false,
       inputColor: false,
@@ -157,14 +159,15 @@ export default {
       colorsSelect: [],
       productName: "",
       productPrice: null,
-      productDescreiption: "",
+      productDescription: "",
       productDate: "",
       productColor: [],
       productType: null,
       selectType: null,
       preview: null,
-      currenProduct: [],
+      currentProduct: [],
       hasDuplicate: false,
+      imgFile: null,
     };
   },
 
@@ -172,7 +175,8 @@ export default {
     selectFile(e) {
       const file = e.target.files[0];
       this.picture = URL.createObjectURL(file);
-      this.imageName = e.target.files[0].name;
+      this.imageName = file.name;
+      this.imgFile = file;
       let reader = new FileReader();
       reader.onload = (e) => {
         this.preview = e.target.result;
@@ -180,34 +184,49 @@ export default {
       reader.readAsDataURL(file);
     },
 
-    async getData() {
-      try {
-        const response = await fetch("http://localhost:5000/colors");
-        const data = await response.json();
-        return data;
-      } catch (error) {
-        console.log(error);
-      }
+    // async getData() {
+    //   try {
+    //     const response = await fetch("http://localhost:5000/colors");
+    //     const data = await response.json();
+    //     return data;
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
+    getData() {
+      ProductDataService.getColors().then((res) => {
+        this.productColor = res.data;
+      });
     },
 
-    async getBagType() {
-      try {
-        const response = await fetch("http://localhost:5000/bagType");
-        const data = await response.json();
-        return data;
-      } catch (error) {
-        console.log(error);
-      }
+    // async getBagType() {
+    //   try {
+    //     const response = await fetch("http://localhost:5000/bagType");
+    //     const data = await response.json();
+    //     return data;
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
+    getBagType() {
+      ProductDataService.getBagTypes().then((res) => {
+        this.productType = res.data;
+      });
     },
 
-    async getProduct() {
-      try {
-        const res = await fetch(this.url);
-        const data = await res.json();
-        return data;
-      } catch (error) {
-        console.log(`Could not get! ${error}`);
-      }
+    // async getProduct() {
+    //   try {
+    //     const res = await fetch(this.url);
+    //     const data = await res.json();
+    //     return data;
+    //   } catch (error) {
+    //     console.log(`Could not get! ${error}`);
+    //   }
+    // },
+    getProduct() {
+      ProductDataService.getAllProduct().then((res) => {
+        this.products = res.data;
+      });
     },
 
     checkColor() {
@@ -215,7 +234,7 @@ export default {
     },
 
     checkDuplicateName(name) {
-      let duplicate = this.currenProduct.filter((p) => p.productName == name);
+      let duplicate = this.currentProduct.filter((p) => p.productName == name);
       console.log(duplicate.length);
       console.log(name);
       if (duplicate.length > 0) {
@@ -227,15 +246,16 @@ export default {
       this.inputName = this.productName === "" ? true : false;
       this.inputPrice =
         this.productPrice === null || this.productPrice === "" ? true : false;
-      this.inputPrice = this.productPrice <= 0 && this.productPrice < 999.99 ? true : false;
+      this.inputPrice =
+        this.productPrice <= 0 && this.productPrice < 999.99 ? true : false;
       this.inputColor = this.colorsSelect.length == 0 ? true : false;
       this.inputType = this.selectType === null ? true : false;
       console.log(this.colorsSelect);
       this.inputDate = this.productDate === "" ? true : false;
-      this.inputDescription = this.productDescreiption === "" ? true : false;
+      this.inputDescription = this.productDescription === "" ? true : false;
       console.log(this.checkDuplicateName(this.inputName));
 
-      if(this.checkDuplicateName(this.productName)){
+      if (this.checkDuplicateName(this.productName)) {
         this.hasDuplicate = true;
         return;
       }
@@ -251,43 +271,68 @@ export default {
       }
       this.inputPrice = parseFloat(this.productPrice);
       this.addProduct();
-      
-
     },
 
-    async addProduct() {
-      try {
-        const res = await fetch(this.url, {
-          method: "POST",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify({
-            productName: this.productName,
-            price: this.productPrice,
-            inStockDate: this.productDate,
-            productDescrip: this.productDescreiption,
-            imageName: this.picture,
-            bagType: this.selectType,
-            colors: this.colorsSelect,
-          }),
-        });
+    // async addProduct() {
+    //   try {
+    //     const res = await fetch(this.url, {
+    //       method: "POST",
+    //       headers: { "Content-type": "application/json" },
+    //       body: JSON.stringify({
+    //         productName: this.productName,
+    //         price: this.productPrice,
+    //         inStockDate: this.productDate,
+    //         productDescrip: this.productDescription,
+    //         imageName: this.picture,
+    //         bagType: this.selectType,
+    //         colors: this.colorsSelect,
+    //       }),
+    //     });
 
-        const data = await res.json();
-        this.products = [...this.products, data];
-        this.productName = "";
-        this.productPrice = null;
-        this.productDescreiption = "";
-        this.productType = "";
-        this.productColor = [];
-        this.imageName = null;
-      } catch (error) {
-        console.log(`Could not save! ${error}`);
-      }
+    //     const data = await res.json();
+    //     this.products = [...this.products, data];
+    //     this.productName = "";
+    //     this.productPrice = null;
+    //     this.productDescription = "";
+    //     this.productType = "";
+    //     this.productColor = [];
+    //     this.imageName = null;
+    //   } catch (error) {
+    //     console.log(`Could not save! ${error}`);
+    //   }
+    // },
+    addProduct() {
+      const formData = new FormData();
+      let data = {
+        productName: this.productName,
+        price: this.productPrice,
+        productDescrip: this.productDescription,
+        inStockDate: this.productDate,
+        imageName: this.imageName,
+        bagType: this.selectType,
+        colors: this.colorsSelect,
+      };
+      const json = JSON.stringify(data);
+      const blob = new Blob([json], {
+        type: "application/json",
+      });
+      formData.append("file", this.imgFile);
+      formData.append("newProduct", blob);
+      axios
+        .post("http://localhost:3000/addProduct", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((res) => {
+          res.status === 200 ? alert("Added") : alert("Error");
+        });
     },
   },
-  async created() {
-    this.productColor = await this.getData();
-    this.productType = await this.getBagType();
-    this.currenProduct = await this.getProduct();
+  created() {
+    this.getData();
+    this.getBagType();
+    this.getProduct();
   },
 
   computed: {},
