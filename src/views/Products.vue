@@ -86,27 +86,25 @@
             <!-- edit -->
             <div v-else>
               <form @submit.prevent="editSubmit(submitEdit)">
-                <div class="form mr-20">
-                  <div class="mb-4 grid grid-cols-2">
-                    <div>
-                      <div>
-                        <p>Product Name</p>
-                      </div>
-                      <div class="mr-10">
-                        <input
-                          v-model="productName"
-                          class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none focus:ring-grayFigma focus:border-transparent focus:ring-2 px-4 rounded border border-grayFigma"
-                          type="text"
-                          placeholder="Product Name"
-                        />
-                      </div>
+                <div class="form">
+                  <div class="nameAndPrice">
+                    <div class="">
+                      <p class="title">Product Name</p>
+                      <input
+                        v-model="productName"
+                        class="inputDetail placeholder-gray-500 placeholder-opacity-50 focus:outline-none focus:ring-grayFigma focus:border-transparent focus:ring-2 rounded border border-grayFigma"
+                        type="text"
+                        placeholder="Product Name"
+                      />
                     </div>
                     <sup v-show="inputName"> Please enter product name! </sup>
 
-                    <div>
-                      <p class="">Price</p>
+                    <div class="">
+                      <div>
+                        <p class="title">Price</p>
+                      </div>
                       <input
-                        class="w-full placeholder-gray-500 placeholder-opacity-50 focus:outline-none focus:ring-grayFigma focus:border-transparent focus:ring-2 px-4 rounded border border-grayFigma"
+                        class="inputDetail placeholder-gray-500 placeholder-opacity-50 focus:outline-none focus:ring-grayFigma focus:border-transparent focus:ring-2 rounded border border-grayFigma"
                         type="number"
                         placeholder="Price"
                         v-model="price"
@@ -115,11 +113,11 @@
                   </div>
                   <sup v-show="inputPrice"> Please enter product price! </sup>
 
-                  <div class="mb-4 grid grid-cols-2">
-                    <div class="">
-                      Bag Type
+                  <div class="typeAndStock">
+                    <div>
+                      <p class="title">Bag Type</p>
                       <form name="dropdown">
-                        <select v-model="selectType">
+                        <select v-model="selectType" class="inputDetail">
                           <option
                             v-for="bagType in bagType"
                             :value="bagType"
@@ -130,10 +128,10 @@
                         </select>
                       </form>
                     </div>
-                    <div class="justify-end">
-                      <p class="">Will Be In Stock On</p>
+                    <div class="">
+                      <p class="title">Will Be In Stock On</p>
                       <input
-                        class="border border-black rounded"
+                        class="inputDetail border border-black rounded"
                         type="date"
                         v-model="inStockDate"
                       />
@@ -141,7 +139,7 @@
                   </div>
                   <sup v-show="inputDate"> Please enter stock date! </sup>
 
-                  <div>Color</div>
+                  <div class="title">Color</div>
                   <div class="mb-6 flex justify-start">
                     <label
                       class="checkbox rounded mr-2"
@@ -160,13 +158,11 @@
                     Please enter product color more than one!
                   </sup>
 
-                  {{ colorsSelect }}
-                  <div class="mb-6">
-                    <p class="">Description</p>
+                  <div class="">
+                    <p class="title">Description</p>
                     <textarea
                       v-model="productDescrip"
-                      class="w-full h-40 placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md break-words text-justify whitespace-normal pr-12 py-2"
-                      style="height: 140px"
+                      class="descripBox placeholder-gray-500 placeholder-opacity-50 focus:outline-none rounded focus:ring-purple-600 focus:border-transparent focus:ring-2 shadow-md break-words text-justify whitespace-normal"
                       placeholder="Description..."
                     />
                   </div>
@@ -174,16 +170,18 @@
                     Please enter description!
                   </sup>
 
-                  <div class="grid grid-cols-2">
-                    <button class="bg-green-500 rounded-lg py-2 mx-16">
-                      CONFIRM
-                    </button>
-                    <button
-                      class="bg-red-500 rounded-lg py-2 mx-16"
-                      @click="hiddenEdit = !hiddenEdit"
-                    >
-                      CANCLE
-                    </button>
+                  <div class="conAndCan">
+                    <div class="edit">
+                      <button class="bg-green-500">CONFIRM</button>
+                    </div>
+                    <div class="delete">
+                      <button
+                        class="bg-red-500"
+                        @click="hiddenEdit = !hiddenEdit"
+                      >
+                        CANCLE
+                      </button>
+                    </div>
                   </div>
                 </div>
               </form>
@@ -433,8 +431,8 @@ img {
   md:flex md:justify-start
   lg:text-base lg:flex lg:justify-start;
 }
-.colorPop{
-  @apply justify-center md:justify-start lg:justify-start
+.colorPop {
+  @apply justify-center md:justify-start lg:justify-start;
 }
 .stock {
   font-size: 10px;
@@ -450,6 +448,10 @@ img {
 }
 .editAndDelete {
   @apply grid grid-cols-2 flex justify-center sm:justify-center md:mr-4;
+}
+.conAndCan {
+  @apply grid grid-cols-2 flex justify-center sm:justify-center sm:mx-10
+  md:justify-center md:mx-2 md:mt-4;
 }
 button {
   @apply px-4 py-1.5 rounded;
@@ -467,23 +469,19 @@ button {
   display: flex;
   cursor: pointer;
   border-radius: 50px;
+  @apply mb-2 lg:mb-4;
 }
 .checkbox > input {
-  height: 25px;
-  width: 25px;
   appearance: none;
   outline: none;
   transition-duration: 0.3s;
   cursor: pointer;
   border-radius: 50px;
+  @apply w-6 h-6 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-8 lg:h-8;
 }
 
 .checkbox > input:checked {
-  border: 2px solid red;
-}
-.form {
-  font-family: "Mitr", sans-serif;
-  font-size: 13px;
+  border: 1px solid red;
 }
 .navProduct {
   @apply mt-4 my-4 flex justify-center sm:flex sm:justify-end lg:flex lg:justify-end lg:my-10;
@@ -493,5 +491,26 @@ button {
 }
 .allProduct {
   @apply mx-2 sm:mx-10 md:mx-20 lg:mx-20;
+}
+.nameAndPrice {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2;
+}
+.typeAndStock {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2;
+}
+.title {
+  @apply mb-1 flex justify-start sm:text-xs lg:text-xs;
+}
+.inputDetail {
+  font-size: 10px;
+  @apply px-1 py-0 mb-1 w-20 sm:w-20 md:w-28 md:text-xs lg:w-32 lg:text-sm;
+}
+.form {
+  font-family: "Mitr", sans-serif;
+  /* font-size: 13px; */
+  @apply mx-2 sm:mx-4 sm:mt-4 md:mx-8 lg:mx-12;
+}
+.descripBox {
+  @apply w-full sm:h-16 sm:text-xs md:h-28 lg:text-sm lg:h-24;
 }
 </style>
