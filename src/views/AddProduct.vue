@@ -28,7 +28,7 @@
           @change="selectFile"
           class="hidden form-control-file"
         />
-        {{ imageName }}
+        <!-- {{ imageName }} -->
       </label>
 
       <div class="content">
@@ -46,7 +46,6 @@
                   />
                 </div>
                 <sup v-show="inputName"> Please enter product name! </sup>
-                <sup v-show="hasDuplicate"> Duplicate name! </sup>
               </div>
 
               <div class="productPrice">
@@ -147,7 +146,7 @@ export default {
     return {
       picture: null,
       check: false,
-      url: "http://localhost:5000/products",
+      // url: "http://localhost:5000/products",
       inputName: false,
       inputPrice: false,
       inputColor: false,
@@ -165,8 +164,6 @@ export default {
       productType: null,
       selectType: null,
       preview: null,
-      currentProduct: [],
-      hasDuplicate: false,
       imgFile: null,
     };
   },
@@ -223,23 +220,9 @@ export default {
     //     console.log(`Could not get! ${error}`);
     //   }
     // },
-    getProduct() {
-      ProductDataService.getAllProduct().then((res) => {
-        this.products = res.data;
-      });
-    },
 
     checkColor() {
       this.check = !this.check;
-    },
-
-    checkDuplicateName(name) {
-      let duplicate = this.currentProduct.filter((p) => p.productName == name);
-      console.log(duplicate.length);
-      console.log(name);
-      if (duplicate.length > 0) {
-        return true;
-      } else return false;
     },
 
     submitFrom() {
@@ -253,12 +236,6 @@ export default {
       console.log(this.colorsSelect);
       this.inputDate = this.productDate === "" ? true : false;
       this.inputDescription = this.productDescription === "" ? true : false;
-      console.log(this.checkDuplicateName(this.inputName));
-
-      if (this.checkDuplicateName(this.productName)) {
-        this.hasDuplicate = true;
-        return;
-      }
       if (
         this.inputName ||
         this.inputPrice ||
@@ -332,7 +309,6 @@ export default {
   created() {
     this.getData();
     this.getBagType();
-    this.getProduct();
   },
 
   // async created() {

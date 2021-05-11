@@ -131,14 +131,12 @@
                       />
                     </div>
                     <sup v-show="inputName"> Please enter product name! </sup>
-                    <sup v-show="hasDuplicate"> Duplicate name! </sup>
                     <div class="">
                       <div>
                         <p class="title">Price</p>
                       </div>
                       <input
                         class="inputDetail placeholder-gray-500 placeholder-opacity-50 focus:outline-none focus:ring-grayFigma focus:border-transparent focus:ring-2 rounded border border-grayFigma"
-                        type="number"
                         placeholder="Price"
                         v-model="price"
                         min="0"
@@ -245,7 +243,7 @@ export default {
     return {
       products: [],
       popupProduct: [],
-      url: "http://localhost:5000/products",
+      // url: "http://localhost:5000/products",
       imageName: "",
       price: null,
       productName: "",
@@ -260,8 +258,6 @@ export default {
       selectColor: [],
       selectType: null,
       submitEdit: null,
-      currentProduct: [],
-      hasDuplicate: false,
       imgFile: null,
       preview: null,
     };
@@ -321,14 +317,6 @@ export default {
       });
     },
 
-    checkDuplicateName(name) {
-      let duplicate = this.currentProduct.filter((p) => p.productName == name);
-      console.log(duplicate.length);
-      console.log(name);
-      if (duplicate.length > 0) {
-        return true;
-      } else return false;
-    },
 
     submitFrom() {
       this.inputName = this.productName === "" ? true : false;
@@ -339,10 +327,6 @@ export default {
       console.log(this.colorsSelect);
       this.inputDate = this.productDate === "" ? true : false;
       this.inputDescription = this.productDescreiption === "" ? true : false;
-      if (this.checkDuplicateName(this.productName)) {
-        this.hasDuplicate = true;
-        return;
-      }
       if (
         this.inputName ||
         this.inputPrice ||
@@ -628,14 +612,14 @@ img {
 button {
   @apply px-4 py-1.5 rounded;
 }
-.edit {
+/* .edit {
   font-size: 10px;
-  @apply flex justify-center;
+  @apply flex justify-center px-2 py-1 rounded md:px-4 md:py-2 ;
 }
 .delete {
   font-size: 10px;
-  @apply flex justify-center;
-}
+  @apply flex justify-center px-2 py-1 rounded md:px-4 md:py-2;
+} */
 
 .checkbox {
   display: flex;
